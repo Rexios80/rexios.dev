@@ -1,10 +1,17 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_analytics/observer.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  final analytics = FirebaseAnalytics();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,6 +22,9 @@ class MyApp extends StatelessWidget {
       ),
       themeMode: ThemeMode.dark,
       home: Launchpad(),
+      navigatorObservers: [
+        FirebaseAnalyticsObserver(analytics: analytics),
+      ],
     );
   }
 }
@@ -33,7 +43,10 @@ class Launchpad extends StatelessWidget {
           children: [
             Text(
               'Hello World! I\'m Rexios.',
-              style: Theme.of(context).textTheme.headline1,
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .headline1,
             ),
           ],
         ),
