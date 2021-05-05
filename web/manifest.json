@@ -1,11 +1,11 @@
 {
-    "name": "rexios_dev",
-    "short_name": "rexios_dev",
+    "name": "rexios.dev",
+    "short_name": "rexios.dev",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#484848",
+    "theme_color": "#e35c89",
+    "description": "Hi! I'm Rexios.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
