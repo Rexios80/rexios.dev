@@ -30,6 +30,23 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+  <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-analytics.js"></script>
+
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyDR_fz0Zppxi9U8Rjg2XMNmJWwaK752iLo",
+      authDomain: "rexios-dev-website.firebaseapp.com",
+      projectId: "rexios-dev-website",
+      storageBucket: "rexios-dev-website.appspot.com",
+      messagingSenderId: "243190586876",
+      appId: "1:243190586876:web:b9237792127ac879cd2679",
+      measurementId: "G-DWC3HXPP1K"
+    };
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
+
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
