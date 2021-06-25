@@ -1,6 +1,6 @@
 {
-    "name": "rexios.dev",
-    "short_name": "rexios.dev",
+    "name": "Rexios",
+    "short_name": "Rexios",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#484848",

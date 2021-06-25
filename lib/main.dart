@@ -1,6 +1,9 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
+import 'package:rexios_dev/view/widgets/bio.dart';
+import 'package:rexios_dev/view/widgets/contact.dart';
+import 'package:rexios_dev/view/widgets/projects.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,7 +15,7 @@ class MyApp extends StatelessWidget {
     FirebaseAnalytics analytics = FirebaseAnalytics();
 
     return MaterialApp(
-      title: 'rexios.dev',
+      title: 'Rexios',
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         primarySwatch: Colors.orange,
@@ -32,19 +35,18 @@ class Launchpad extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.orange[600],
-        title: Text('rexios.dev'),
+        title: Text('Rexios'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Hello World! I\'m Rexios.',
-              style: Theme.of(context).textTheme.headline1,
-            ),
-          ],
-        ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      body: ListView(
+        padding: EdgeInsets.all(40),
+        children: [
+          Bio(),
+          SizedBox(height: 80),
+          Projects(),
+          SizedBox(height: 80),
+          Contact(),
+        ],
+      ),
     );
   }
 }
