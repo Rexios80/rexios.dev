@@ -10,7 +10,7 @@ class Bio extends StatelessWidget {
           'Bio',
           style: Theme.of(context).textTheme.headline4,
         ),
-        SizedBox(height: 10),
+        SizedBox(height: 20),
         FutureMarkdown('assets/strings/bio.txt'),
       ],
     );

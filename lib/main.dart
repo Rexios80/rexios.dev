@@ -40,11 +40,20 @@ class Launchpad extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.all(40),
         children: [
-          Bio(),
-          SizedBox(height: 80),
-          Projects(),
-          SizedBox(height: 80),
-          Contact(),
+          Center(
+            child: Container(
+              constraints: BoxConstraints(maxWidth: 800),
+              child: Column(
+                children: [
+                  Bio(),
+                  SizedBox(height: 80),
+                  Projects(),
+                  SizedBox(height: 80),
+                  Contact(),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );

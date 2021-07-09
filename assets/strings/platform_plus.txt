@@ -1,0 +1,1 @@
+[platform_plus](https://pub.dev/packages/platform_plus): easily figure out information about the platform your code is running on

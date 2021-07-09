@@ -1,1 +1,1 @@
-[The Polar Flutter plugin](https://pub.dev/packages/polar) is a wrapper for the Polar SDK on iOS and Android.
+[polar](https://pub.dev/packages/polar): a wrapper for the Polar SDK on iOS and Android
