@@ -1,1 +1,0 @@
-[polar](https://pub.dev/packages/polar): a wrapper for the Polar SDK on iOS and Android

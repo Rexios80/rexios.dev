@@ -35,16 +35,7 @@ class Projects extends StatelessWidget {
           style: Theme.of(context).textTheme.headline6,
         ),
         SizedBox(height: 20),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            FutureMarkdown('assets/strings/polar.txt'),
-            SizedBox(height: 5),
-            FutureMarkdown('assets/strings/workout.txt'),
-            SizedBox(height: 5),
-            FutureMarkdown('assets/strings/platform_plus.txt'),
-          ],
-        ),
+        FutureMarkdown('assets/strings/plugins.txt'),
       ],
     );
   }
