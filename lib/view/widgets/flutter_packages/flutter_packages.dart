@@ -15,7 +15,14 @@ class FlutterPackages extends StatelessWidget {
                   .map((info) => FlutterPackage(package: info))
                   .toList(),
             )
-          : CircularProgressIndicator(),
+          : Column(children: [
+              CircularProgressIndicator(),
+              SizedBox(height: 10),
+              Text(
+                'This doesn\'t like to work in Safari on the first page load.\n\nPlease refresh.',
+                textAlign: TextAlign.center,
+              ),
+            ]),
     );
   }
 }
