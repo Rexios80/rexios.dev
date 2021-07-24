@@ -39,7 +39,7 @@ class Launchpad extends StatelessWidget {
         title: Text('Rexios'),
       ),
       body: ListView(
-        padding: EdgeInsets.all(40),
+        padding: EdgeInsets.all(20),
         children: [
           Center(
             child: Container(

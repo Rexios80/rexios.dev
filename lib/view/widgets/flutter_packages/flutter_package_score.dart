@@ -15,6 +15,7 @@ class FlutterPackageScore extends StatelessWidget {
           Column(
             children: [
               Text(package.score.likeCount.toString()),
+              SizedBox(height: 3),
               Text(
                 'LIKES',
                 style: Get.textTheme.caption!.copyWith(fontSize: 8),
@@ -25,6 +26,7 @@ class FlutterPackageScore extends StatelessWidget {
           Column(
             children: [
               Text(package.score.grantedPoints.toString()),
+              SizedBox(height: 3),
               Text(
                 'PUB POINTS',
                 style: Get.textTheme.caption!.copyWith(fontSize: 8),
@@ -34,8 +36,10 @@ class FlutterPackageScore extends StatelessWidget {
           VerticalDivider(),
           Column(
             children: [
-              Text((package.score.popularityScore * 100).toStringAsFixed(0) +
-                  '%'),
+              Text(
+                (package.score.popularityScore * 100).toStringAsFixed(0) + '%',
+              ),
+              SizedBox(height: 3),
               Text(
                 'POPULARITY',
                 style: Get.textTheme.caption!.copyWith(fontSize: 8),
