@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rexios_dev/view/widgets/flutter_plugins.dart';
+import 'package:rexios_dev/view/widgets/flutter_packages/flutter_packages.dart';
 import 'package:rexios_dev/view/widgets/future_markdown.dart';
 
 class Projects extends StatelessWidget {
@@ -32,11 +32,11 @@ class Projects extends StatelessWidget {
         Image.asset('assets/images/hds.gif'),
         SizedBox(height: 80),
         Text(
-          'Flutter Plugins',
+          'Flutter Packages',
           style: Theme.of(context).textTheme.headline6,
         ),
         SizedBox(height: 20),
-        FlutterPlugins(),
+        FlutterPackages(),
       ],
     );
   }

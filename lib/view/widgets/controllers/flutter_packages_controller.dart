@@ -1,18 +1,18 @@
 import 'package:get/get.dart';
 import 'package:pub_api_client/pub_api_client.dart';
 
-class FlutterPluginsController extends GetxController {
-  final _client = PubClient();
+class FlutterPackagesController extends GetxController {
+  final _client = PubClient(pubUrl: 'https://proxy.rexios.dev/pub');
 
-  RxMap<String, PackageMetricsInfo> packageMetricsInfos = RxMap();
+  RxList<PackageScoreInfo> packageScoreInfos = RxList();
 
-  FlutterPluginsController() {
+  FlutterPackagesController() {
     _init();
   }
 
   void _init() async {
     final packages = await _getPackages();
-    packageMetricsInfos.value = await _getMetricsInfos(packages: packages);
+    packageScoreInfos.value = await _getMetricsInfos(packages: packages);
   }
 
   Future<List<String>> _getPackages({
@@ -30,22 +30,22 @@ class FlutterPluginsController extends GetxController {
     }
   }
 
-  Future<Map<String, PackageMetricsInfo>> _getMetricsInfos({
+  Future<List<PackageScoreInfo>> _getMetricsInfos({
     required List<String> packages,
   }) async {
-    final scoreCardMap = <String, PackageMetricsInfo>{};
-    packages.forEach((package) async {
-      final metrics = await _client.packageMetrics(package);
+    final scoreCards = <PackageScoreInfo>[];
+    for (final package in packages) {
+      final score = await _client.packageScore(package);
       final info = await _client.packageInfo(package);
-      scoreCardMap[package] = PackageMetricsInfo(metrics: metrics, info: info);
-    });
-    return scoreCardMap;
+      scoreCards.add(PackageScoreInfo(score: score, info: info));
+    }
+    return scoreCards;
   }
 }
 
-class PackageMetricsInfo {
-  final PackageMetrics metrics;
+class PackageScoreInfo {
+  final PackageScore score;
   final PubPackage info;
 
-  PackageMetricsInfo({required this.metrics, required this.info});
+  PackageScoreInfo({required this.score, required this.info});
 }

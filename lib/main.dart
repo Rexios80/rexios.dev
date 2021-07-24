@@ -1,6 +1,7 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:rexios_dev/view/widgets/bio.dart';
 import 'package:rexios_dev/view/widgets/contact.dart';
 import 'package:rexios_dev/view/widgets/projects.dart';
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     FirebaseAnalytics analytics = FirebaseAnalytics();
 
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Rexios',
       darkTheme: ThemeData(
         brightness: Brightness.dark,
