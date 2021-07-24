@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:pub_api_client/pub_api_client.dart';
 
 class FlutterPackagesController extends GetxController {
-  final _client = PubClient(pubUrl: 'https://proxy.rexios.dev/pub');
+  final _client = PubClient(pubUrl: 'https://proxy.rexios.dev/pub/');
 
   RxList<PackageScoreInfo> packageScoreInfos = RxList();
 
