@@ -15,22 +15,26 @@ class FlutterPackage extends StatelessWidget {
       padding: EdgeInsets.only(bottom: 30),
       child: InkWell(
         onTap: () => launch(package.info.url),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Text(
-                  package.info.name,
-                  style: Get.textTheme.bodyText2!
-                      .copyWith(fontWeight: FontWeight.bold),
-                ),
-                Spacer(),
-                FlutterPackageScore(package: package),
-              ],
-            ),
-            SizedBox(height: 10),
-            Text(package.info.description),
-          ],
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    package.info.name,
+                    style: Get.textTheme.bodyText2!
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  Spacer(),
+                  FlutterPackageScore(package: package),
+                ],
+              ),
+              SizedBox(height: 10),
+              Text(package.info.description),
+            ],
+          ),
         ),
       ),
     );
