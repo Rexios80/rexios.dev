@@ -9,11 +9,13 @@ class FlutterPackages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => Column(
-        children: _controller.packageScoreInfos
-            .map((info) => FlutterPackage(package: info))
-            .toList(),
-      ),
+      () => _controller.packageScoreInfos.isNotEmpty
+          ? Column(
+              children: _controller.packageScoreInfos
+                  .map((info) => FlutterPackage(package: info))
+                  .toList(),
+            )
+          : CircularProgressIndicator(),
     );
   }
 }
