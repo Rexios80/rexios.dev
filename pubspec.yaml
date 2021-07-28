@@ -14,6 +14,7 @@ dependencies:
   url_launcher: ^6.0.7
   get: ^4.2.4
   pub_api_client: ^2.0.5
+  github: ^8.1.1
 
 dev_dependencies:
   flutter_test:

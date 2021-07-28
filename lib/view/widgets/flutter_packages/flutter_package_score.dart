@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import 'package:rexios_dev/view/widgets/controllers/flutter_packages_controller.dart';
 
 class FlutterPackageScore extends StatelessWidget {
+  static const _dividerWidth = 10.0;
+
   final PackageScoreInfo package;
 
   const FlutterPackageScore({required this.package});
@@ -22,7 +24,7 @@ class FlutterPackageScore extends StatelessWidget {
               ),
             ],
           ),
-          VerticalDivider(),
+          VerticalDivider(width: _dividerWidth),
           Column(
             children: [
               Text(package.score.grantedPoints.toString()),
@@ -33,7 +35,7 @@ class FlutterPackageScore extends StatelessWidget {
               ),
             ],
           ),
-          VerticalDivider(),
+          VerticalDivider(width: _dividerWidth),
           Column(
             children: [
               Text(
@@ -42,6 +44,17 @@ class FlutterPackageScore extends StatelessWidget {
               SizedBox(height: 3),
               Text(
                 'POPULARITY',
+                style: Get.textTheme.caption!.copyWith(fontSize: 8),
+              ),
+            ],
+          ),
+          VerticalDivider(width: _dividerWidth),
+          Column(
+            children: [
+              Text(package.stars.toString()),
+              SizedBox(height: 3),
+              Text(
+                'STARS',
                 style: Get.textTheme.caption!.copyWith(fontSize: 8),
               ),
             ],
