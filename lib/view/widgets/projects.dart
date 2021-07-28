@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'package:rexios_dev/view/widgets/controllers/projects_controller.dart';
 import 'package:rexios_dev/view/widgets/flutter_packages/flutter_packages.dart';
 import 'package:rexios_dev/view/widgets/future_markdown.dart';
-import 'package:rexios_dev/view/widgets/github_info.dart';
+import 'package:rexios_dev/view/widgets/github_projects/github_info.dart';
+import 'package:rexios_dev/view/widgets/github_projects/github_projects.dart';
 
 class Projects extends StatelessWidget {
   final ProjectsController _controller = Get.find();
@@ -53,6 +54,13 @@ class Projects extends StatelessWidget {
         ),
         SizedBox(height: 20),
         FlutterPackages(),
+        SizedBox(height: 80),
+        Text(
+          'Other Projects',
+          style: Theme.of(context).textTheme.headline6,
+        ),
+        SizedBox(height: 20),
+        GitHubProjects(),
       ],
     );
   }

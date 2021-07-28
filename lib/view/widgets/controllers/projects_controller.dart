@@ -8,12 +8,23 @@ class ProjectsController extends GetxController {
     'Health-Data-Server-Overlay',
   );
 
+  static final _repos = [hdsSlug];
+
   final GithubController _github = Get.find();
   final repoMap = RxMap<RepositorySlug, Repository>();
+  final otherRepos = RxList<Repository>();
 
   ProjectsController() {
-    _github
+    _repos.forEach((repo) => _github
         .getRepository(hdsSlug)
-        .then((repository) => repoMap[hdsSlug] = repository);
+        .then((repository) => repoMap[hdsSlug] = repository));
+    _github.repositoryStream
+        .where((repo) =>
+            !_repos.contains(repo.slug()) &&
+            !repo.isFork &&
+            repo.description.isNotEmpty &&
+            // Invisible characters to say this repo should not be shown on the site
+            !repo.description.contains('‎‎‎‎‎'))
+        .listen(otherRepos.add);
   }
 }
