@@ -8,8 +8,7 @@ class GithubController {
     ),
   );
 
-  Stream starStream(RepositorySlug slug) {
-    // Collect stars for a specified time
-    return _githubClient.activity.listStargazers(slug);
+  Future<Repository> getRepository(RepositorySlug slug) {
+    return _githubClient.repositories.getRepository(slug);
   }
 }

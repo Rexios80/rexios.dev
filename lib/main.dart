@@ -5,10 +5,12 @@ import 'package:get/get.dart';
 import 'package:rexios_dev/view/widgets/bio.dart';
 import 'package:rexios_dev/view/widgets/contact.dart';
 import 'package:rexios_dev/view/widgets/controllers/github_controller.dart';
+import 'package:rexios_dev/view/widgets/controllers/projects_controller.dart';
 import 'package:rexios_dev/view/widgets/projects.dart';
 
 void main() {
   Get.put(GithubController());
+  Get.put(ProjectsController());
 
   runApp(MyApp());
 }

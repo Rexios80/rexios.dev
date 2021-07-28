@@ -40,35 +40,33 @@ class FlutterPackagesController extends GetxController {
     for (final package in packages) {
       final score = await _pubClient.packageScore(package);
       final info = await _pubClient.packageInfo(package);
-      final psi = PackageScoreInfo(score: score, info: info);
-      scoreCards.add(psi);
-      _listenToStarStream(psi);
+      final stars = await _getStars(info);
+      scoreCards.add(PackageScoreInfo(score: score, info: info, stars: stars));
     }
     return scoreCards;
   }
 
-  void _listenToStarStream(PackageScoreInfo psi) async {
-    final split = psi.info.latestPubspec.homepage?.split('/');
-    if (split == null) return;
+  Future<int> _getStars(PubPackage package) async {
+    final split = package.latestPubspec.homepage?.split('/');
+    if (split == null) return 0;
 
     final user = split[split.length - 2];
     final repo = split.last;
+    final slug = RepositorySlug(user, repo);
+    final repository = await _github.getRepository(slug);
 
-    // Get all the stars for this repo and update the psi
-    _github.starStream(RepositorySlug(user, repo)).listen((e) {
-      psi.stars++;
-      packageScoreInfos.refresh();
-    });
+    return repository.stargazersCount;
   }
 }
 
 class PackageScoreInfo {
   final PackageScore score;
   final PubPackage info;
-  int stars = 0;
+  final int stars;
 
   PackageScoreInfo({
     required this.score,
     required this.info,
+    required this.stars,
   });
 }

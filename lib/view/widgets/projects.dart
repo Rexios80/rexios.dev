@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:rexios_dev/view/widgets/controllers/projects_controller.dart';
 import 'package:rexios_dev/view/widgets/flutter_packages/flutter_packages.dart';
 import 'package:rexios_dev/view/widgets/future_markdown.dart';
+import 'package:rexios_dev/view/widgets/github_info.dart';
 
 class Projects extends StatelessWidget {
+  final ProjectsController _controller = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -25,6 +30,17 @@ class Projects extends StatelessWidget {
         Text(
           'Health Data Server (Flutter/Firebase/AWS/Swift)',
           style: Theme.of(context).textTheme.headline6,
+        ),
+        SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Obx(
+              () => GitHubInfo(
+                repository: _controller.repoMap[ProjectsController.hdsSlug],
+              ),
+            ),
+          ],
         ),
         SizedBox(height: 20),
         FutureMarkdown('assets/strings/hds.txt'),
