@@ -27,7 +27,7 @@ class FlutterPackageScore extends StatelessWidget {
           VerticalDivider(width: _dividerWidth),
           Column(
             children: [
-              Text(package.score.grantedPoints.toString()),
+              Text(package.score.grantedPoints?.toString() ?? '-'),
               SizedBox(height: 3),
               Text(
                 'PUB POINTS',
@@ -39,7 +39,11 @@ class FlutterPackageScore extends StatelessWidget {
           Column(
             children: [
               Text(
-                (package.score.popularityScore * 100).toStringAsFixed(0) + '%',
+                package.score.popularityScore != null
+                    ? (package.score.popularityScore! * 100)
+                            .toStringAsFixed(0) +
+                        '%'
+                    : '-',
               ),
               SizedBox(height: 3),
               Text(
