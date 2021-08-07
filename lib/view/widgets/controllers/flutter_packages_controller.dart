@@ -4,7 +4,7 @@ import 'package:pub_api_client/pub_api_client.dart';
 import 'package:rexios_dev/view/widgets/controllers/github_controller.dart';
 
 class FlutterPackagesController extends GetxController {
-  final _pubClient = PubClient(pubUrl: 'https://proxy.rexios.dev/pub/');
+  final _pubClient = PubClient(pubUrl: 'https://proxy.rexios.dev/pub');
   final GithubController _github = Get.find();
 
   RxList<PackageScoreInfo> packageScoreInfos = RxList();
@@ -14,22 +14,30 @@ class FlutterPackagesController extends GetxController {
   }
 
   void _init() async {
-    final packages = await _getPackages();
-    packageScoreInfos.value = await _getMetricsInfos(packages: packages);
+    final rexiosPackages = await _getPackages(publisher: 'rexios.dev');
+    final vrchatPackages = await _getPackages(publisher: 'vrchat.community');
+    packageScoreInfos.value = await _getMetricsInfos(
+      packages: rexiosPackages + vrchatPackages,
+    );
   }
 
   Future<List<String>> _getPackages({
+    required String publisher,
     int page = 1,
   }) async {
     final results =
-        await _pubClient.search('', publisher: 'rexios.dev', page: page);
+        await _pubClient.search('', publisher: publisher, page: page);
     final packages = results.packages.map((e) => e.package).toList();
     if (packages.isEmpty) {
       // Terminating condition
       // There were no results for this page
       return [];
     } else {
-      return packages + await _getPackages(page: page + 1);
+      return packages +
+          await _getPackages(
+            publisher: publisher,
+            page: page + 1,
+          );
     }
   }
 
