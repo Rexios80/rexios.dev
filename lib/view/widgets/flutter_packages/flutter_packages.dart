@@ -20,7 +20,7 @@ class FlutterPackages extends StatelessWidget {
                 CircularProgressIndicator(),
                 SizedBox(height: 20),
                 Text(
-                  'This doesn\'t like to work in Safari on the first page load\n\nPlease refresh',
+                  'This doesn\'t like to work in non Chromium based browsers',
                   textAlign: TextAlign.center,
                 ),
               ],
