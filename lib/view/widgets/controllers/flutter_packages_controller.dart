@@ -46,6 +46,13 @@ class FlutterPackagesController extends GetxController {
   }) async {
     final scoreCards = <PackageScoreInfo>[];
     for (final package in packages) {
+      final options = await _pubClient.packageOptions(package);
+
+      // Don't show unlisted packages
+      if (options.isUnlisted) {
+        continue;
+      }
+
       final score = await _pubClient.packageScore(package);
       final info = await _pubClient.packageInfo(package);
       final stars = await _getStars(info);
