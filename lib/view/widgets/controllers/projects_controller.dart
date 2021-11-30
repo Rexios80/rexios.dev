@@ -23,11 +23,16 @@ class ProjectsController extends GetxController {
     _github.repositoryStream
         .where(
           (repo) =>
+              // Don't show repos that are handled individually
               !_repos.contains(repo.slug()) &&
+              // Don't show forks
               !repo.isFork &&
+              // Don't show Flutter/Dart package repos
+              !repo.homepage.contains('pub.dev') &&
+              // Don't show repos that don't have a description
               repo.description.isNotEmpty &&
-              // Invisible characters to say this repo should not be shown on the site
-              !repo.description.contains('‎‎‎‎‎'),
+              // Special string to force ignore a repo
+              !repo.description.contains('rexios.dev:ignore'),
         )
         .listen(otherRepos.add);
   }
