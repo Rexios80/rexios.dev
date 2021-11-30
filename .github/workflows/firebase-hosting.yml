@@ -10,10 +10,10 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@latest
-      - uses: subosito/flutter-action@latest
+      - uses: actions/checkout@v2.4.0
+      - uses: subosito/flutter-action@v1.5.3
       - run: flutter pub get && flutter build web
-      - uses: FirebaseExtended/action-hosting-deploy@latest
+      - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_REXIOS_DEV_WEBSITE }}'
