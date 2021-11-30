@@ -12,10 +12,12 @@ void main() {
   Get.put(GithubController());
   Get.put(ProjectsController());
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     FirebaseAnalytics analytics = FirebaseAnalytics();
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.orange,
       ),
       themeMode: ThemeMode.dark,
-      home: Launchpad(),
+      home: const Launchpad(),
       navigatorObservers: [
         FirebaseAnalyticsObserver(analytics: analytics),
       ],
@@ -36,26 +38,28 @@ class MyApp extends StatelessWidget {
 }
 
 class Launchpad extends StatelessWidget {
+  const Launchpad({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.orange[600],
-        title: Text('Rexios'),
+        title: const Text('Rexios'),
       ),
       body: ListView(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         children: [
           Center(
             child: Container(
-              constraints: BoxConstraints(maxWidth: 800),
+              constraints: const BoxConstraints(maxWidth: 800),
               child: Column(
                 children: [
-                  Bio(),
-                  SizedBox(height: 80),
+                  const Bio(),
+                  const SizedBox(height: 80),
                   Projects(),
-                  SizedBox(height: 80),
-                  Contact(),
+                  const SizedBox(height: 80),
+                  const Contact(),
                 ],
               ),
             ),

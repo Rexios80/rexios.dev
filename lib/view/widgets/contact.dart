@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../app_icons.dart';
+import 'package:rexios_dev/app_icons.dart';
 
 class Contact extends StatelessWidget {
+  const Contact({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -12,37 +14,38 @@ class Contact extends StatelessWidget {
           'Social Links',
           style: Theme.of(context).textTheme.headline4,
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Spacer(),
+            const Spacer(),
             InkWell(
               onTap: () => launch('https://discord.gg/v5yAdrucdG'),
-              child: Icon(AppIcons.discord),
+              child: const Icon(AppIcons.discord),
             ),
-            SizedBox(width: 15),
+            const SizedBox(width: 15),
             InkWell(
               onTap: () => launch('https://github.com/Rexios80'),
-              child: Icon(AppIcons.github),
+              child: const Icon(AppIcons.github),
             ),
-            SizedBox(width: 15),
+            const SizedBox(width: 15),
             InkWell(
               onTap: () => launch('https://twitter.com/rexios85'),
-              child: Icon(AppIcons.twitter),
+              child: const Icon(AppIcons.twitter),
             ),
-            SizedBox(width: 15),
+            const SizedBox(width: 15),
             InkWell(
               onTap: () => launch(
-                  'https://www.youtube.com/channel/UCH09mEzK3Tec-yPKbbfQVhQ'),
-              child: Icon(AppIcons.youtube),
+                'https://www.youtube.com/channel/UCH09mEzK3Tec-yPKbbfQVhQ',
+              ),
+              child: const Icon(AppIcons.youtube),
             ),
-            SizedBox(width: 15),
+            const SizedBox(width: 15),
             InkWell(
               onTap: () => launch('https://www.twitch.tv/rexios85'),
-              child: Icon(AppIcons.twitch),
+              child: const Icon(AppIcons.twitch),
             ),
-            Spacer(),
+            const Spacer(),
           ],
         ),
       ],

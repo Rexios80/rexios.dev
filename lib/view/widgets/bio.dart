@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:rexios_dev/view/widgets/future_markdown.dart';
 
 class Bio extends StatelessWidget {
+  const Bio({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -10,8 +12,8 @@ class Bio extends StatelessWidget {
           'Bio',
           style: Theme.of(context).textTheme.headline4,
         ),
-        SizedBox(height: 20),
-        FutureMarkdown('assets/strings/bio.txt'),
+        const SizedBox(height: 20),
+        const FutureMarkdown('assets/strings/bio.txt'),
       ],
     );
   }

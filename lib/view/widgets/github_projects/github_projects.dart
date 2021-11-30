@@ -6,6 +6,8 @@ import 'package:rexios_dev/view/widgets/github_projects/github_project.dart';
 class GitHubProjects extends StatelessWidget {
   final ProjectsController _controller = Get.find();
 
+  GitHubProjects({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -15,7 +17,7 @@ class GitHubProjects extends StatelessWidget {
                   .map((repository) => GitHubProject(repository: repository))
                   .toList(),
             )
-          : CircularProgressIndicator(),
+          : const CircularProgressIndicator(),
     );
   }
 }

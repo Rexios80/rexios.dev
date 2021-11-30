@@ -9,6 +9,8 @@ import 'package:rexios_dev/view/widgets/github_projects/github_projects.dart';
 class Projects extends StatelessWidget {
   final ProjectsController _controller = Get.find();
 
+  Projects({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -18,21 +20,21 @@ class Projects extends StatelessWidget {
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.headline4,
         ),
-        SizedBox(height: 40),
+        const SizedBox(height: 40),
         Text(
           'Project Madad Maps (Flutter/Firebase)',
           style: Theme.of(context).textTheme.headline6,
         ),
-        SizedBox(height: 20),
-        FutureMarkdown('assets/strings/pmm.txt'),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
+        const FutureMarkdown('assets/strings/pmm.txt'),
+        const SizedBox(height: 20),
         Image.asset('assets/images/pmm.png'),
-        SizedBox(height: 80),
+        const SizedBox(height: 80),
         Text(
           'Health Data Server (Flutter/Firebase/AWS/Swift)',
           style: Theme.of(context).textTheme.headline6,
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -43,23 +45,23 @@ class Projects extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 20),
-        FutureMarkdown('assets/strings/hds.txt'),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
+        const FutureMarkdown('assets/strings/hds.txt'),
+        const SizedBox(height: 20),
         Image.asset('assets/images/hds.gif'),
-        SizedBox(height: 80),
+        const SizedBox(height: 80),
         Text(
           'Flutter Packages',
           style: Theme.of(context).textTheme.headline6,
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         FlutterPackages(),
-        SizedBox(height: 80),
+        const SizedBox(height: 80),
         Text(
           'Other Projects',
           style: Theme.of(context).textTheme.headline6,
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         GitHubProjects(),
       ],
     );

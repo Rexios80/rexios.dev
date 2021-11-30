@@ -15,16 +15,20 @@ class ProjectsController extends GetxController {
   final otherRepos = RxList<Repository>();
 
   ProjectsController() {
-    _repos.forEach((repo) => _github
-        .getRepository(hdsSlug)
-        .then((repository) => repoMap[hdsSlug] = repository));
+    for (var slug in _repos) {
+      _github
+          .getRepository(slug)
+          .then((repository) => repoMap[slug] = repository);
+    }
     _github.repositoryStream
-        .where((repo) =>
-            !_repos.contains(repo.slug()) &&
-            !repo.isFork &&
-            repo.description.isNotEmpty &&
-            // Invisible characters to say this repo should not be shown on the site
-            !repo.description.contains('‎‎‎‎‎'))
+        .where(
+          (repo) =>
+              !_repos.contains(repo.slug()) &&
+              !repo.isFork &&
+              repo.description.isNotEmpty &&
+              // Invisible characters to say this repo should not be shown on the site
+              !repo.description.contains('‎‎‎‎‎'),
+        )
         .listen(otherRepos.add);
   }
 }

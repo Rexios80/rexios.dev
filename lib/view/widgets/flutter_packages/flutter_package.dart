@@ -7,16 +7,16 @@ import 'package:url_launcher/url_launcher.dart';
 class FlutterPackage extends StatelessWidget {
   final PackageScoreInfo package;
 
-  const FlutterPackage({required this.package});
+  const FlutterPackage({required this.package, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 30),
+      padding: const EdgeInsets.only(bottom: 30),
       child: InkWell(
         onTap: () => launch(package.info.url),
         child: Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -27,11 +27,11 @@ class FlutterPackage extends StatelessWidget {
                     style: Get.textTheme.bodyText2!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   FlutterPackageScore(package: package),
                 ],
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(package.info.description),
             ],
           ),

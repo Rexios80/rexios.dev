@@ -6,7 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 class FutureMarkdown extends StatelessWidget {
   final String asset;
 
-  const FutureMarkdown(this.asset);
+  const FutureMarkdown(this.asset, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

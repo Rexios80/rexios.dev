@@ -7,16 +7,16 @@ import 'package:url_launcher/url_launcher.dart';
 class GitHubProject extends StatelessWidget {
   final Repository repository;
 
-  const GitHubProject({required this.repository});
+  const GitHubProject({required this.repository, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 30),
+      padding: const EdgeInsets.only(bottom: 30),
       child: InkWell(
         onTap: () => launch(repository.htmlUrl),
         child: Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -27,11 +27,11 @@ class GitHubProject extends StatelessWidget {
                     style: Get.textTheme.bodyText2!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   GitHubInfo(repository: repository),
                 ],
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(repository.description),
             ],
           ),

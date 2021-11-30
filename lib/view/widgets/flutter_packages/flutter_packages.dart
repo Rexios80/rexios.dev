@@ -6,6 +6,8 @@ import 'package:rexios_dev/view/widgets/flutter_packages/flutter_package.dart';
 class FlutterPackages extends StatelessWidget {
   final _controller = FlutterPackagesController();
 
+  FlutterPackages({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Obx(
@@ -16,7 +18,7 @@ class FlutterPackages extends StatelessWidget {
                   .toList(),
             )
           : Column(
-              children: [
+              children: const [
                 CircularProgressIndicator(),
                 SizedBox(height: 20),
                 Text(

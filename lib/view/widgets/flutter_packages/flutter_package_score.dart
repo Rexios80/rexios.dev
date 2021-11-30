@@ -7,7 +7,8 @@ class FlutterPackageScore extends StatelessWidget {
 
   final PackageScoreInfo package;
 
-  const FlutterPackageScore({required this.package});
+  const FlutterPackageScore({required this.package, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,25 +18,25 @@ class FlutterPackageScore extends StatelessWidget {
           Column(
             children: [
               Text(package.score.likeCount.toString()),
-              SizedBox(height: 3),
+              const SizedBox(height: 3),
               Text(
                 'LIKES',
                 style: Get.textTheme.caption!.copyWith(fontSize: 8),
               ),
             ],
           ),
-          VerticalDivider(width: _dividerWidth),
+          const VerticalDivider(width: _dividerWidth),
           Column(
             children: [
               Text(package.score.grantedPoints?.toString() ?? '-'),
-              SizedBox(height: 3),
+              const SizedBox(height: 3),
               Text(
                 'PUB POINTS',
                 style: Get.textTheme.caption!.copyWith(fontSize: 8),
               ),
             ],
           ),
-          VerticalDivider(width: _dividerWidth),
+          const VerticalDivider(width: _dividerWidth),
           Column(
             children: [
               Text(
@@ -45,18 +46,18 @@ class FlutterPackageScore extends StatelessWidget {
                         '%'
                     : '-',
               ),
-              SizedBox(height: 3),
+              const SizedBox(height: 3),
               Text(
                 'POPULARITY',
                 style: Get.textTheme.caption!.copyWith(fontSize: 8),
               ),
             ],
           ),
-          VerticalDivider(width: _dividerWidth),
+          const VerticalDivider(width: _dividerWidth),
           Column(
             children: [
               Text(package.stars.toString()),
-              SizedBox(height: 3),
+              const SizedBox(height: 3),
               Text(
                 'STARS',
                 style: Get.textTheme.caption!.copyWith(fontSize: 8),

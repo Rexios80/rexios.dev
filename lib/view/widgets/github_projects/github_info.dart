@@ -7,7 +7,7 @@ class GitHubInfo extends StatelessWidget {
 
   final Repository? repository;
 
-  const GitHubInfo({required this.repository});
+  const GitHubInfo({required this.repository, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,29 +17,29 @@ class GitHubInfo extends StatelessWidget {
           Column(
             children: [
               Text(repository?.subscribersCount.toString() ?? '0'),
-              SizedBox(height: 3),
+              const SizedBox(height: 3),
               Text(
                 'WATCHERS',
                 style: Get.textTheme.caption!.copyWith(fontSize: 8),
               ),
             ],
           ),
-          VerticalDivider(width: _dividerWidth),
+          const VerticalDivider(width: _dividerWidth),
           Column(
             children: [
               Text(repository?.stargazersCount.toString() ?? '0'),
-              SizedBox(height: 3),
+              const SizedBox(height: 3),
               Text(
                 'STARS',
                 style: Get.textTheme.caption!.copyWith(fontSize: 8),
               ),
             ],
           ),
-          VerticalDivider(width: _dividerWidth),
+          const VerticalDivider(width: _dividerWidth),
           Column(
             children: [
               Text(repository?.forksCount.toString() ?? '0'),
-              SizedBox(height: 3),
+              const SizedBox(height: 3),
               Text(
                 'FORKS',
                 style: Get.textTheme.caption!.copyWith(fontSize: 8),
