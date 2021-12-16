@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:github/github.dart';
 import 'package:pub_api_client/pub_api_client.dart';
 import 'package:rexios_dev/view/widgets/controllers/github_controller.dart';
+import 'package:collection/collection.dart';
 
 class FlutterPackagesController extends GetxController {
   final _pubClient = PubClient(pubUrl: 'https://proxy.rexios.dev/pub');
@@ -58,7 +59,13 @@ class FlutterPackagesController extends GetxController {
       final stars = await _getStars(info);
       scoreCards.add(PackageScoreInfo(score: score, info: info, stars: stars));
     }
-    return scoreCards;
+
+    // Sort by popularity
+    return scoreCards.sorted(
+      (a, b) =>
+          b.score.popularityScore?.compareTo(a.score.popularityScore ?? -1) ??
+          -1,
+    );
   }
 
   Future<int> _getStars(PubPackage package) async {

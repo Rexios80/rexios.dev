@@ -1,16 +1,22 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:firebase_analytics/observer.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rexios_dev/firebase_options.dart';
 import 'package:rexios_dev/view/widgets/bio.dart';
 import 'package:rexios_dev/view/widgets/contact.dart';
 import 'package:rexios_dev/view/widgets/controllers/github_controller.dart';
 import 'package:rexios_dev/view/widgets/controllers/projects_controller.dart';
 import 'package:rexios_dev/view/widgets/projects.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   Get.put(GithubController());
   Get.put(ProjectsController());
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  FirebaseAnalytics.instance;
 
   runApp(const MyApp());
 }
@@ -20,8 +26,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    FirebaseAnalytics analytics = FirebaseAnalytics();
-
     return GetMaterialApp(
       title: 'Rexios',
       darkTheme: ThemeData(
@@ -30,9 +34,6 @@ class MyApp extends StatelessWidget {
       ),
       themeMode: ThemeMode.dark,
       home: const Launchpad(),
-      navigatorObservers: [
-        FirebaseAnalyticsObserver(analytics: analytics),
-      ],
     );
   }
 }
