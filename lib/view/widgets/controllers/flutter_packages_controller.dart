@@ -69,11 +69,12 @@ class FlutterPackagesController extends GetxController {
   }
 
   Future<int> _getStars(PubPackage package) async {
-    final split = package.latestPubspec.homepage?.split('/');
-    if (split == null) return 0;
+    final gitHubPath = package.latestPubspec.homepage?.replaceAll('https://github.com/', '');
+    if (gitHubPath == null) return 0;
+    final split = gitHubPath.split('/');
 
-    final user = split[split.length - 2];
-    final repo = split.last;
+    final user = split[0];
+    final repo = split[1];
     final slug = RepositorySlug(user, repo);
     final repository = await _github.getRepository(slug);
 
