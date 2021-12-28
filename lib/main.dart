@@ -16,7 +16,8 @@ void main() async {
   Get.put(ProjectsController());
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  FirebaseAnalytics.instance;
+  final analytics = FirebaseAnalytics.instance;
+  await analytics.logAppOpen();
 
   runApp(const MyApp());
 }
