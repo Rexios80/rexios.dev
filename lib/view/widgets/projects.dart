@@ -51,7 +51,7 @@ class Projects extends StatelessWidget {
         Image.asset('assets/images/hds.gif'),
         const SizedBox(height: 80),
         Text(
-          'Flutter Packages',
+          'Dart/Flutter Packages',
           style: Theme.of(context).textTheme.headline6,
         ),
         const SizedBox(height: 20),
