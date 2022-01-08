@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import 'package:rexios_dev/app_icons.dart';
 
 class Contact extends StatelessWidget {
   const Contact({Key? key}) : super(key: key);
@@ -16,39 +15,50 @@ class Contact extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            const Spacer(),
-            InkWell(
-              onTap: () => launch('https://discord.gg/v5yAdrucdG'),
-              child: const Icon(AppIcons.discord),
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            SocialLink(
+              icon: FontAwesomeIcons.discord,
+              url: 'https://discord.gg/v5yAdrucdG',
             ),
-            const SizedBox(width: 15),
-            InkWell(
-              onTap: () => launch('https://github.com/Rexios80'),
-              child: const Icon(AppIcons.github),
+            SocialLink(
+              icon: FontAwesomeIcons.github,
+              url: 'https://github.com/Rexios80',
             ),
-            const SizedBox(width: 15),
-            InkWell(
-              onTap: () => launch('https://twitter.com/rexios85'),
-              child: const Icon(AppIcons.twitter),
+            SocialLink(
+              icon: FontAwesomeIcons.twitter,
+              url: 'https://twitter.com/rexios85',
             ),
-            const SizedBox(width: 15),
-            InkWell(
-              onTap: () => launch(
-                'https://www.youtube.com/channel/UCH09mEzK3Tec-yPKbbfQVhQ',
-              ),
-              child: const Icon(AppIcons.youtube),
+            SocialLink(
+              icon: FontAwesomeIcons.youtube,
+              url: 'https://www.youtube.com/channel/UCH09mEzK3Tec-yPKbbfQVhQ',
             ),
-            const SizedBox(width: 15),
-            InkWell(
-              onTap: () => launch('https://www.twitch.tv/rexios85'),
-              child: const Icon(AppIcons.twitch),
+            SocialLink(
+              icon: FontAwesomeIcons.twitch,
+              url: 'https://twitch.tv/rexios85',
             ),
-            const Spacer(),
           ],
         ),
       ],
+    );
+  }
+}
+
+class SocialLink extends StatelessWidget {
+  final IconData icon;
+  final String url;
+
+  const SocialLink({
+    Key? key,
+    required this.icon,
+    required this.url,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: FaIcon(icon),
+      onPressed: () => launch(url),
     );
   }
 }
