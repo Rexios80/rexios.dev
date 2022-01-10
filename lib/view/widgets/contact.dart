@@ -58,6 +58,7 @@ class SocialLink extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       icon: FaIcon(icon),
+      padding: EdgeInsets.zero,
       onPressed: () => launch(url),
     );
   }
