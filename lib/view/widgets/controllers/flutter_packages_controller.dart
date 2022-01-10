@@ -49,8 +49,8 @@ class FlutterPackagesController extends GetxController {
     for (final package in packages) {
       final options = await _pubClient.packageOptions(package);
 
-      // Don't show unlisted packages
-      if (options.isUnlisted) {
+      // Don't show unlisted or discontinued packages
+      if (options.isUnlisted || options.isDiscontinued) {
         continue;
       }
 
