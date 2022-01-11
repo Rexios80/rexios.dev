@@ -271,9 +271,11 @@ packages:
   pub_api_client:
     dependency: "direct main"
     description:
-      name: pub_api_client
-      url: "https://pub.dartlang.org"
-    source: hosted
+      path: "."
+      ref: "33da2a9881f35b0f800f3b8bac5f81dde67cdcfe"
+      resolved-ref: "33da2a9881f35b0f800f3b8bac5f81dde67cdcfe"
+      url: "https://github.com/Rexios80/pub_api_client"
+    source: git
     version: "2.2.0"
   pub_semver:
     dependency: transitive
