@@ -162,7 +162,7 @@ packages:
       name: freezed_annotation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.14.3"
+    version: "1.1.0"
   get:
     dependency: "direct main"
     description:
@@ -272,8 +272,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "33da2a9881f35b0f800f3b8bac5f81dde67cdcfe"
-      resolved-ref: "33da2a9881f35b0f800f3b8bac5f81dde67cdcfe"
+      ref: "5698c22eec982b60049732abfff92171ceaf6bff"
+      resolved-ref: "5698c22eec982b60049732abfff92171ceaf6bff"
       url: "https://github.com/Rexios80/pub_api_client"
     source: git
     version: "2.2.0"
