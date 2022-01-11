@@ -27,7 +27,7 @@ class FlutterPackagesController extends GetxController {
     int page = 1,
   }) async {
     final results =
-        await _pubClient.search(publisher: publisher, page: page);
+        await _pubClient.search('', publisher: publisher, page: page);
     final packages = results.packages.map((e) => e.package).toList();
     if (packages.isEmpty) {
       // Terminating condition
