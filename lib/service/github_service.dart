@@ -12,6 +12,7 @@ class GitHubService {
     return _githubClient.repositories.getRepository(slug);
   }
 
-  Stream<Repository> get repositoryStream =>
-      _githubClient.repositories.listUserRepositories('Rexios80');
+  Stream<Repository> get repositoryStream => _githubClient.repositories
+      .listUserRepositories('Rexios80')
+      .asBroadcastStream();
 }

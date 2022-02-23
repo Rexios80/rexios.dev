@@ -17,12 +17,16 @@ class GitHubController {
   final otherRepos = RxList<Repository>();
 
   GitHubController() {
+    _init();
+  }
+
+  void _init() async {
     for (var slug in _repos) {
-      _github
-          .getRepository(slug)
-          .then((repository) => repoMap[slug] = repository);
+      final repo = await _github.getRepository(slug);
+      repoMap[slug] = repo;
     }
-    _github.repositoryStream
+    final stream = _github.repositoryStream;
+    stream
         .where(
           (repo) =>
               // Don't show repos that are handled individually
@@ -37,5 +41,7 @@ class GitHubController {
               !repo.description.contains('rexios.dev:ignore'),
         )
         .listen(otherRepos.add);
+    await stream.last;
+    otherRepos.sort((a, b) => b.stargazersCount.compareTo(a.stargazersCount));
   }
 }
