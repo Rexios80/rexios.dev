@@ -1,6 +1,6 @@
 import 'package:github/github.dart';
 
-class GithubController {
+class GitHubService {
   final _githubClient = GitHub(
     auth: Authentication.basic(
       '4fe008104bfe648d932c',

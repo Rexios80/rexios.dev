@@ -3,16 +3,16 @@ import 'package:github/github.dart';
 import 'package:pub_api_client/pub_api_client.dart';
 import 'package:collection/collection.dart';
 import 'package:fast_ui/fast_ui.dart';
-import 'package:rexios_dev/controllers/github_controller.dart';
 import 'package:rexios_dev/model/package_score_info.dart';
+import 'package:rexios_dev/service/github_service.dart';
 
-class FlutterPackagesController {
+class PubController {
   final _pubClient = PubClient(pubUrl: 'https://proxy.rexios.dev/pub');
-  final _github = GetIt.I<GithubController>();
+  final _github = GetIt.I<GitHubService>();
 
   final packageScoreInfos = RxList<PackageScoreInfo>();
 
-  FlutterPackagesController() {
+  PubController() {
     _init();
   }
 

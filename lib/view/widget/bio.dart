@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rexios_dev/view/widgets/future_markdown.dart';
+import 'package:rexios_dev/view/widget/asset_markdown_body.dart';
 
 class Bio extends StatelessWidget {
   const Bio({Key? key}) : super(key: key);
@@ -13,7 +13,7 @@ class Bio extends StatelessWidget {
           style: Theme.of(context).textTheme.headline4,
         ),
         const SizedBox(height: 20),
-        const FutureMarkdown('assets/strings/bio.txt'),
+        const AssetMarkdownBody('assets/strings/bio.txt'),
       ],
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:github/github.dart';
-import 'package:rexios_dev/view/widgets/github_projects/github_info.dart';
+import 'package:rexios_dev/view/widget/github/github_project_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:fast_ui/fast_ui.dart';
 
@@ -28,7 +28,7 @@ class GitHubProject extends StatelessWidget {
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                   const Spacer(),
-                  GitHubInfo(repository: repository),
+                  GitHubProjectInfo(repository: repository),
                 ],
               ),
               const SizedBox(height: 10),

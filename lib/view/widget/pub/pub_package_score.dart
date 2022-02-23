@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:github/github.dart';
 import 'package:fast_ui/fast_ui.dart';
+import 'package:rexios_dev/model/package_score_info.dart';
 
-class GitHubInfo extends StatelessWidget {
+class PubPackageScore extends StatelessWidget {
   static const _dividerWidth = 10.0;
 
-  final Repository? repository;
+  final PackageScoreInfo package;
 
-  const GitHubInfo({required this.repository, Key? key}) : super(key: key);
+  const PubPackageScore({required this.package, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +17,10 @@ class GitHubInfo extends StatelessWidget {
         children: [
           Column(
             children: [
-              Text(repository?.subscribersCount.toString() ?? '0'),
+              Text(package.score.likeCount.toString()),
               const SizedBox(height: 3),
               Text(
-                'WATCHERS',
+                'LIKES',
                 style: context.textTheme.caption!.copyWith(fontSize: 8),
               ),
             ],
@@ -27,21 +28,38 @@ class GitHubInfo extends StatelessWidget {
           const VerticalDivider(width: _dividerWidth),
           Column(
             children: [
-              Text(repository?.stargazersCount.toString() ?? '0'),
+              Text(package.score.grantedPoints?.toString() ?? '-'),
+              const SizedBox(height: 3),
+              Text(
+                'PUB POINTS',
+                style: context.textTheme.caption!.copyWith(fontSize: 8),
+              ),
+            ],
+          ),
+          const VerticalDivider(width: _dividerWidth),
+          Column(
+            children: [
+              Text(
+                package.score.popularityScore != null
+                    ? (package.score.popularityScore! * 100)
+                            .toStringAsFixed(0) +
+                        '%'
+                    : '-',
+              ),
+              const SizedBox(height: 3),
+              Text(
+                'POPULARITY',
+                style: context.textTheme.caption!.copyWith(fontSize: 8),
+              ),
+            ],
+          ),
+          const VerticalDivider(width: _dividerWidth),
+          Column(
+            children: [
+              Text(package.stars.toString()),
               const SizedBox(height: 3),
               Text(
                 'STARS',
-                style: context.textTheme.caption!.copyWith(fontSize: 8),
-              ),
-            ],
-          ),
-          const VerticalDivider(width: _dividerWidth),
-          Column(
-            children: [
-              Text(repository?.forksCount.toString() ?? '0'),
-              const SizedBox(height: 3),
-              Text(
-                'FORKS',
                 style: context.textTheme.caption!.copyWith(fontSize: 8),
               ),
             ],

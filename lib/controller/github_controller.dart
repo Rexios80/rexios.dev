@@ -1,9 +1,9 @@
 import 'package:get_it/get_it.dart';
 import 'package:github/github.dart';
 import 'package:fast_ui/fast_ui.dart';
-import 'package:rexios_dev/controllers/github_controller.dart';
+import 'package:rexios_dev/service/github_service.dart';
 
-class ProjectsController {
+class GitHubController {
   static final hdsSlug = RepositorySlug(
     'Rexios80',
     'Health-Data-Server-Overlay',
@@ -11,11 +11,12 @@ class ProjectsController {
 
   static final _repos = [hdsSlug];
 
-  final _github = GetIt.I<GithubController>();
+  final _github = GetIt.I<GitHubService>();
+
   final repoMap = RxMap<RepositorySlug, Repository>();
   final otherRepos = RxList<Repository>();
 
-  ProjectsController() {
+  GitHubController() {
     for (var slug in _repos) {
       _github
           .getRepository(slug)

@@ -1,12 +1,12 @@
 import 'package:fast_ui/fast_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:rexios_dev/controllers/flutter_packages_controller.dart';
-import 'package:rexios_dev/view/widgets/flutter_packages/flutter_package.dart';
+import 'package:rexios_dev/controller/pub_controller.dart';
+import 'package:rexios_dev/view/widget/pub/pub_package.dart';
 
-class FlutterPackages extends StatelessWidget {
-  final _controller = FlutterPackagesController();
+class PubPackages extends StatelessWidget {
+  final _controller = PubController();
 
-  FlutterPackages({Key? key}) : super(key: key);
+  PubPackages({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class FlutterPackages extends StatelessWidget {
       () => _controller.packageScoreInfos.isNotEmpty
           ? Column(
               children: _controller.packageScoreInfos
-                  .map((info) => FlutterPackage(package: info))
+                  .map((info) => PubPackage(package: info))
                   .toList(),
             )
           : Column(

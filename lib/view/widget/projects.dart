@@ -1,14 +1,14 @@
 import 'package:fast_ui/fast_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:rexios_dev/controllers/projects_controller.dart';
-import 'package:rexios_dev/view/widgets/flutter_packages/flutter_packages.dart';
-import 'package:rexios_dev/view/widgets/future_markdown.dart';
-import 'package:rexios_dev/view/widgets/github_projects/github_info.dart';
-import 'package:rexios_dev/view/widgets/github_projects/github_projects.dart';
+import 'package:rexios_dev/controller/github_controller.dart';
+import 'package:rexios_dev/view/widget/asset_markdown_body.dart';
+import 'package:rexios_dev/view/widget/github/github_project_info.dart';
+import 'package:rexios_dev/view/widget/github/github_projects.dart';
+import 'package:rexios_dev/view/widget/pub/pub_packages.dart';
 
 class Projects extends StatelessWidget {
-  final _controller = GetIt.I<ProjectsController>();
+  final _controller = GetIt.I<GitHubController>();
 
   Projects({Key? key}) : super(key: key);
 
@@ -27,7 +27,7 @@ class Projects extends StatelessWidget {
           style: Theme.of(context).textTheme.headline6,
         ),
         const SizedBox(height: 20),
-        const FutureMarkdown('assets/strings/pmm.txt'),
+        const AssetMarkdownBody('assets/strings/pmm.txt'),
         const SizedBox(height: 20),
         Image.asset('assets/images/pmm.png'),
         const SizedBox(height: 80),
@@ -40,14 +40,14 @@ class Projects extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FastBuilder(
-              () => GitHubInfo(
-                repository: _controller.repoMap[ProjectsController.hdsSlug],
+              () => GitHubProjectInfo(
+                repository: _controller.repoMap[GitHubController.hdsSlug],
               ),
             ),
           ],
         ),
         const SizedBox(height: 20),
-        const FutureMarkdown('assets/strings/hds.txt'),
+        const AssetMarkdownBody('assets/strings/hds.txt'),
         const SizedBox(height: 20),
         Image.asset('assets/images/hds.gif'),
         const SizedBox(height: 80),
@@ -56,7 +56,7 @@ class Projects extends StatelessWidget {
           style: Theme.of(context).textTheme.headline6,
         ),
         const SizedBox(height: 20),
-        FlutterPackages(),
+        PubPackages(),
         const SizedBox(height: 80),
         Text(
           'Other Projects',

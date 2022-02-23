@@ -3,10 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class FutureMarkdown extends StatelessWidget {
+class AssetMarkdownBody extends StatelessWidget {
   final String asset;
 
-  const FutureMarkdown(this.asset, {Key? key}) : super(key: key);
+  const AssetMarkdownBody(this.asset, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

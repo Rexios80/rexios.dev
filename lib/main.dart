@@ -2,18 +2,18 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:rexios_dev/controllers/github_controller.dart';
-import 'package:rexios_dev/controllers/projects_controller.dart';
+import 'package:rexios_dev/controller/github_controller.dart';
 import 'package:rexios_dev/firebase_options.dart';
-import 'package:rexios_dev/view/widgets/bio.dart';
-import 'package:rexios_dev/view/widgets/contact.dart';
-import 'package:rexios_dev/view/widgets/projects.dart';
+import 'package:rexios_dev/service/github_service.dart';
+import 'package:rexios_dev/view/widget/projects.dart';
+import 'package:rexios_dev/view/widget/bio.dart';
+import 'package:rexios_dev/view/widget/contact.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  GetIt.I.registerSingleton(GithubController());
-  GetIt.I.registerSingleton(ProjectsController());
+  GetIt.I.registerSingleton(GitHubService());
+  GetIt.I.registerSingleton(GitHubController());
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   final analytics = FirebaseAnalytics.instance;

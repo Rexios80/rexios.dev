@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:rexios_dev/model/package_score_info.dart';
-import 'package:rexios_dev/view/widgets/flutter_packages/flutter_package_score.dart';
+import 'package:rexios_dev/view/widget/pub/pub_package_score.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:fast_ui/fast_ui.dart';
 
-class FlutterPackage extends StatelessWidget {
+class PubPackage extends StatelessWidget {
   final PackageScoreInfo package;
 
-  const FlutterPackage({required this.package, Key? key}) : super(key: key);
+  const PubPackage({required this.package, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class FlutterPackage extends StatelessWidget {
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                   const Spacer(),
-                  FlutterPackageScore(package: package),
+                  PubPackageScore(package: package),
                 ],
               ),
               const SizedBox(height: 10),
