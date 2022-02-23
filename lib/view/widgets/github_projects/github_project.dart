@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:github/github.dart';
 import 'package:rexios_dev/view/widgets/github_projects/github_info.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:fast_ui/fast_ui.dart';
 
 class GitHubProject extends StatelessWidget {
   final Repository repository;
@@ -24,7 +24,7 @@ class GitHubProject extends StatelessWidget {
                 children: [
                   Text(
                     repository.name,
-                    style: Get.textTheme.bodyText2!
+                    style: context.textTheme.bodyText2!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                   const Spacer(),

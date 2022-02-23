@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:rexios_dev/view/widgets/controllers/flutter_packages_controller.dart';
+import 'package:fast_ui/fast_ui.dart';
 
 class FlutterPackageScore extends StatelessWidget {
   static const _dividerWidth = 10.0;
@@ -21,7 +21,7 @@ class FlutterPackageScore extends StatelessWidget {
               const SizedBox(height: 3),
               Text(
                 'LIKES',
-                style: Get.textTheme.caption!.copyWith(fontSize: 8),
+                style: context.textTheme.caption!.copyWith(fontSize: 8),
               ),
             ],
           ),
@@ -32,7 +32,7 @@ class FlutterPackageScore extends StatelessWidget {
               const SizedBox(height: 3),
               Text(
                 'PUB POINTS',
-                style: Get.textTheme.caption!.copyWith(fontSize: 8),
+                style: context.textTheme.caption!.copyWith(fontSize: 8),
               ),
             ],
           ),
@@ -49,7 +49,7 @@ class FlutterPackageScore extends StatelessWidget {
               const SizedBox(height: 3),
               Text(
                 'POPULARITY',
-                style: Get.textTheme.caption!.copyWith(fontSize: 8),
+                style: context.textTheme.caption!.copyWith(fontSize: 8),
               ),
             ],
           ),
@@ -60,7 +60,7 @@ class FlutterPackageScore extends StatelessWidget {
               const SizedBox(height: 3),
               Text(
                 'STARS',
-                style: Get.textTheme.caption!.copyWith(fontSize: 8),
+                style: context.textTheme.caption!.copyWith(fontSize: 8),
               ),
             ],
           ),

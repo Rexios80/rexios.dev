@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:github/github.dart';
+import 'package:fast_ui/fast_ui.dart';
 
 class GitHubInfo extends StatelessWidget {
   static const _dividerWidth = 10.0;
@@ -20,7 +20,7 @@ class GitHubInfo extends StatelessWidget {
               const SizedBox(height: 3),
               Text(
                 'WATCHERS',
-                style: Get.textTheme.caption!.copyWith(fontSize: 8),
+                style: context.textTheme.caption!.copyWith(fontSize: 8),
               ),
             ],
           ),
@@ -31,7 +31,7 @@ class GitHubInfo extends StatelessWidget {
               const SizedBox(height: 3),
               Text(
                 'STARS',
-                style: Get.textTheme.caption!.copyWith(fontSize: 8),
+                style: context.textTheme.caption!.copyWith(fontSize: 8),
               ),
             ],
           ),
@@ -42,7 +42,7 @@ class GitHubInfo extends StatelessWidget {
               const SizedBox(height: 3),
               Text(
                 'FORKS',
-                style: Get.textTheme.caption!.copyWith(fontSize: 8),
+                style: context.textTheme.caption!.copyWith(fontSize: 8),
               ),
             ],
           ),

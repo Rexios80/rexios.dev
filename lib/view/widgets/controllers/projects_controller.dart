@@ -1,8 +1,9 @@
-import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
 import 'package:github/github.dart';
 import 'package:rexios_dev/view/widgets/controllers/github_controller.dart';
+import 'package:fast_ui/fast_ui.dart';
 
-class ProjectsController extends GetxController {
+class ProjectsController {
   static final hdsSlug = RepositorySlug(
     'Rexios80',
     'Health-Data-Server-Overlay',
@@ -10,7 +11,7 @@ class ProjectsController extends GetxController {
 
   static final _repos = [hdsSlug];
 
-  final GithubController _github = Get.find();
+  final _github = GetIt.I<GithubController>();
   final repoMap = RxMap<RepositorySlug, Repository>();
   final otherRepos = RxList<Repository>();
 

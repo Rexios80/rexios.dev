@@ -1,7 +1,7 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
 import 'package:rexios_dev/firebase_options.dart';
 import 'package:rexios_dev/view/widgets/bio.dart';
 import 'package:rexios_dev/view/widgets/contact.dart';
@@ -12,8 +12,8 @@ import 'package:rexios_dev/view/widgets/projects.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  Get.put(GithubController());
-  Get.put(ProjectsController());
+  GetIt.I.registerSingleton(GithubController());
+  GetIt.I.registerSingleton(ProjectsController());
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   final analytics = FirebaseAnalytics.instance;
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MaterialApp(
       title: 'Rexios',
       darkTheme: ThemeData(
         brightness: Brightness.dark,

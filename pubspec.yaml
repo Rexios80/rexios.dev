@@ -13,7 +13,8 @@ dependencies:
   firebase_analytics: ^9.0.2
   flutter_markdown: ^0.6.2
   url_launcher: ^6.0.7
-  get: ^4.2.4
+  fast_ui: ^0.1.0
+  get_it: ^7.2.0
   pub_api_client:
     git:
       url: https://github.com/Rexios80/pub_api_client

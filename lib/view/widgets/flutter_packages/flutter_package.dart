@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:rexios_dev/view/widgets/controllers/flutter_packages_controller.dart';
 import 'package:rexios_dev/view/widgets/flutter_packages/flutter_package_score.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:fast_ui/fast_ui.dart';
 
 class FlutterPackage extends StatelessWidget {
   final PackageScoreInfo package;
@@ -24,7 +24,7 @@ class FlutterPackage extends StatelessWidget {
                 children: [
                   Text(
                     package.info.name,
-                    style: Get.textTheme.bodyText2!
+                    style: context.textTheme.bodyText2!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                   const Spacer(),

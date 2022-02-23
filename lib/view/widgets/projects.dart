@@ -1,5 +1,6 @@
+import 'package:fast_ui/fast_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
 import 'package:rexios_dev/view/widgets/controllers/projects_controller.dart';
 import 'package:rexios_dev/view/widgets/flutter_packages/flutter_packages.dart';
 import 'package:rexios_dev/view/widgets/future_markdown.dart';
@@ -7,7 +8,7 @@ import 'package:rexios_dev/view/widgets/github_projects/github_info.dart';
 import 'package:rexios_dev/view/widgets/github_projects/github_projects.dart';
 
 class Projects extends StatelessWidget {
-  final ProjectsController _controller = Get.find();
+  final _controller = GetIt.I<ProjectsController>();
 
   Projects({Key? key}) : super(key: key);
 
@@ -38,7 +39,7 @@ class Projects extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Obx(
+            FastBuilder(
               () => GitHubInfo(
                 repository: _controller.repoMap[ProjectsController.hdsSlug],
               ),

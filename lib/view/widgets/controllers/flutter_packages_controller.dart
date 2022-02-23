@@ -1,14 +1,15 @@
-import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
 import 'package:github/github.dart';
 import 'package:pub_api_client/pub_api_client.dart';
 import 'package:rexios_dev/view/widgets/controllers/github_controller.dart';
 import 'package:collection/collection.dart';
+import 'package:fast_ui/fast_ui.dart';
 
-class FlutterPackagesController extends GetxController {
+class FlutterPackagesController {
   final _pubClient = PubClient(pubUrl: 'https://proxy.rexios.dev/pub');
-  final GithubController _github = Get.find();
+  final _github = GetIt.I<GithubController>();
 
-  RxList<PackageScoreInfo> packageScoreInfos = RxList();
+  final packageScoreInfos = RxList<PackageScoreInfo>();
 
   FlutterPackagesController() {
     _init();
@@ -17,9 +18,11 @@ class FlutterPackagesController extends GetxController {
   void _init() async {
     final rexiosPackages = await _getPackages(publisher: 'rexios.dev');
     final vrchatPackages = await _getPackages(publisher: 'vrchat.community');
-    packageScoreInfos.value = await _getMetricsInfos(
+    final infos = await _getMetricsInfos(
       packages: rexiosPackages + vrchatPackages,
     );
+    packageScoreInfos.clear();
+    packageScoreInfos.addAll(infos);
   }
 
   Future<List<String>> _getPackages({
@@ -69,7 +72,8 @@ class FlutterPackagesController extends GetxController {
   }
 
   Future<int> _getStars(PubPackage package) async {
-    final gitHubPath = package.latestPubspec.homepage?.replaceAll('https://github.com/', '');
+    final gitHubPath =
+        package.latestPubspec.homepage?.replaceAll('https://github.com/', '');
     if (gitHubPath == null) return 0;
     final split = gitHubPath.split('/');
 
