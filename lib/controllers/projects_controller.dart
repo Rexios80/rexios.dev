@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:github/github.dart';
-import 'package:rexios_dev/view/widgets/controllers/github_controller.dart';
 import 'package:fast_ui/fast_ui.dart';
+import 'package:rexios_dev/controllers/github_controller.dart';
 
 class ProjectsController {
   static final hdsSlug = RepositorySlug(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:rexios_dev/view/widgets/controllers/flutter_packages_controller.dart';
 import 'package:fast_ui/fast_ui.dart';
+import 'package:rexios_dev/model/package_score_info.dart';
 
 class FlutterPackageScore extends StatelessWidget {
   static const _dividerWidth = 10.0;

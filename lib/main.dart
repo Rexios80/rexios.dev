@@ -2,11 +2,11 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:rexios_dev/controllers/github_controller.dart';
+import 'package:rexios_dev/controllers/projects_controller.dart';
 import 'package:rexios_dev/firebase_options.dart';
 import 'package:rexios_dev/view/widgets/bio.dart';
 import 'package:rexios_dev/view/widgets/contact.dart';
-import 'package:rexios_dev/view/widgets/controllers/github_controller.dart';
-import 'package:rexios_dev/view/widgets/controllers/projects_controller.dart';
 import 'package:rexios_dev/view/widgets/projects.dart';
 
 void main() async {

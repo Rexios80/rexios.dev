@@ -1,6 +1,6 @@
 import 'package:fast_ui/fast_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:rexios_dev/view/widgets/controllers/flutter_packages_controller.dart';
+import 'package:rexios_dev/controllers/flutter_packages_controller.dart';
 import 'package:rexios_dev/view/widgets/flutter_packages/flutter_package.dart';
 
 class FlutterPackages extends StatelessWidget {

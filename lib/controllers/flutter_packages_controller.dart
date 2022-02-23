@@ -1,9 +1,10 @@
 import 'package:get_it/get_it.dart';
 import 'package:github/github.dart';
 import 'package:pub_api_client/pub_api_client.dart';
-import 'package:rexios_dev/view/widgets/controllers/github_controller.dart';
 import 'package:collection/collection.dart';
 import 'package:fast_ui/fast_ui.dart';
+import 'package:rexios_dev/controllers/github_controller.dart';
+import 'package:rexios_dev/model/package_score_info.dart';
 
 class FlutterPackagesController {
   final _pubClient = PubClient(pubUrl: 'https://proxy.rexios.dev/pub');
@@ -84,16 +85,4 @@ class FlutterPackagesController {
 
     return repository.stargazersCount;
   }
-}
-
-class PackageScoreInfo {
-  final PackageScore score;
-  final PubPackage info;
-  final int stars;
-
-  PackageScoreInfo({
-    required this.score,
-    required this.info,
-    required this.stars,
-  });
 }
