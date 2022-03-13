@@ -6,7 +6,6 @@ import 'package:rexios_dev/controller/github_controller.dart';
 import 'package:rexios_dev/firebase_options.dart';
 import 'package:rexios_dev/service/github_service.dart';
 import 'package:rexios_dev/view/widget/projects.dart';
-import 'package:rexios_dev/view/widget/bio.dart';
 import 'package:rexios_dev/view/widget/contact.dart';
 
 void main() async {
@@ -57,8 +56,6 @@ class Launchpad extends StatelessWidget {
               constraints: const BoxConstraints(maxWidth: 800),
               child: Column(
                 children: [
-                  const Bio(),
-                  const SizedBox(height: 80),
                   Projects(),
                   const SizedBox(height: 80),
                   const Contact(),
