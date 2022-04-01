@@ -37,6 +37,8 @@ class GitHubController {
               !repo.homepage.contains('pub.dev') &&
               // Don't show repos that don't have a description
               repo.description.isNotEmpty &&
+              // Don't show archived repos
+              !repo.archived &&
               // Special string to force ignore a repo
               !repo.description.contains('rexios.dev:ignore'),
         )
