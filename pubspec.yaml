@@ -36,6 +36,7 @@ flutter:
     - assets/images/
     - assets/strings/
 
+# flutter pub run flutter_native_splash:create
 flutter_native_splash:
   color: '#042a49'
   image: 'assets/images/icon.png'
