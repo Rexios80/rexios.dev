@@ -7,7 +7,7 @@ import 'package:rexios_dev/model/package_score_info.dart';
 import 'package:rexios_dev/service/github_service.dart';
 
 class PubController {
-  final _pub = PubClient(pubUrl: 'https://proxy.rexios.dev/pub');
+  final _pub = PubClient(pubUrl: 'http://localhost:8080/pub');
   final _github = GetIt.I<GitHubService>();
 
   final packageScoreInfos = RxList<PackageScoreInfo>();
