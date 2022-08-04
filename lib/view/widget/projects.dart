@@ -23,8 +23,12 @@ class Projects extends StatelessWidget {
         ),
         const SizedBox(height: 40),
         Text(
-          'Project Madad Maps (Flutter/Firebase)',
+          'Project Madad Maps',
           style: Theme.of(context).textTheme.headline6,
+        ),
+        Text(
+          '(Flutter/Firebase)',
+          style: Theme.of(context).textTheme.caption,
         ),
         const SizedBox(height: 20),
         const AssetMarkdownBody('assets/strings/pmm.txt'),
@@ -32,8 +36,12 @@ class Projects extends StatelessWidget {
         Image.asset('assets/images/pmm.png'),
         const SizedBox(height: 80),
         Text(
-          'Health Data Server (Flutter/Firebase/AWS/Swift)',
+          'Health Data Server',
           style: Theme.of(context).textTheme.headline6,
+        ),
+        Text(
+          '(Flutter/Firebase/AWS/Swift)',
+          style: Theme.of(context).textTheme.caption,
         ),
         const SizedBox(height: 20),
         Row(
