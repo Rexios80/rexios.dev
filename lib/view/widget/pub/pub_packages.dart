@@ -17,16 +17,7 @@ class PubPackages extends StatelessWidget {
                   .map((info) => PubPackage(package: info))
                   .toList(),
             )
-          : Column(
-              children: const [
-                CircularProgressIndicator(),
-                SizedBox(height: 20),
-                Text(
-                  'This doesn\'t like to work in non Chromium based browsers',
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
+          : const CircularProgressIndicator(),
     );
   }
 }
