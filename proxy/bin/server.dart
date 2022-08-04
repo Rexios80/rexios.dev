@@ -1,29 +1,28 @@
 import 'dart:io';
-import 'package:jaguar/jaguar.dart';
-import 'package:jaguar_cors/jaguar_cors.dart';
-import 'package:jaguar_dev_proxy/jaguar_dev_proxy.dart';
+import 'package:shelf/shelf.dart';
+import 'package:shelf/shelf_io.dart' as shelf_io;
+import 'package:shelf_cors_headers/shelf_cors_headers.dart';
+import 'package:shelf_proxy/shelf_proxy.dart';
+import 'package:shelf_router/shelf_router.dart';
 
-const corsOptions = CorsOptions(
-  allowAllOrigins: true,
-  allowAllMethods: true,
-  allowAllHeaders: true,
-  allowCredentials: true,
-  allowNonCorsRequests: true,
-  vary: true,
-);
+final pubHandler = Pipeline()
+    .addMiddleware(
+      corsHeaders(
+        originChecker:
+            originOneOf(['https://rexios.dev', 'https://beta.rexios.dev']),
+      ),
+    )
+    .addHandler(
+      proxyHandler('https://pub.dartlang.org', proxyName: 'proxy.rexios.dev'),
+    );
 
 void main(List<String> arguments) async {
+  final app = Router()..mount('/pub', pubHandler);
+
   final port = Platform.environment.containsKey('PORT')
       ? int.parse(Platform.environment['PORT']!)
       : 8080;
+  final server = await shelf_io.serve(app, '0.0.0.0', port);
 
-  final server = Jaguar(port: port);
-  server.addRoute(
-    getOnlyProxy(
-      '/pub/*',
-      'http://pub.dartlang.org',
-    )..after(cors(corsOptions)),
-  );
-  server.log.onRecord.listen(print);
-  await server.serve(logRequests: true);
+  print('Listening on :${server.port}');
 }

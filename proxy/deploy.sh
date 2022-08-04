@@ -6,4 +6,4 @@
 #   --allow-unauthenticated  # for public access
 
 # ex: gcloud run deploy my-service --source=. --project=my-project --region=us-central1 --platform=managed --allow-unauthenticated
-gcloud run deploy NAME --source=PATH --project=PROJECT --region=REGION --platform=managed --allow-unauthenticated
+gcloud run deploy rexios-dev-nginx --source=. --project=rexios-dev-website --region=us-central1 --platform=managed --allow-unauthenticated

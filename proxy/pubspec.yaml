@@ -6,9 +6,10 @@ environment:
   sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
-  jaguar: ^3.1.3
-  jaguar_cors: ^3.0.2
-  jaguar_dev_proxy: ^3.0.0
+  shelf: ^1.3.2
+  shelf_router: ^1.1.3
+  shelf_proxy: ^1.0.2
+  shelf_cors_headers: ^0.1.3
 
 dev_dependencies:
   rexios_lints: ^3.0.0
