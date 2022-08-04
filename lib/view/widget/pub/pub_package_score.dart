@@ -7,8 +7,7 @@ class PubPackageScore extends StatelessWidget {
 
   final PackageScoreInfo package;
 
-  const PubPackageScore({required this.package, Key? key})
-      : super(key: key);
+  const PubPackageScore({required this.package, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +40,7 @@ class PubPackageScore extends StatelessWidget {
             children: [
               Text(
                 package.score.popularityScore != null
-                    ? (package.score.popularityScore! * 100)
-                            .toStringAsFixed(0) +
-                        '%'
+                    ? '${(package.score.popularityScore! * 100).toStringAsFixed(0)}%'
                     : '-',
               ),
               const SizedBox(height: 3),

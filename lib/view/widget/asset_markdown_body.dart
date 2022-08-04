@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class AssetMarkdownBody extends StatelessWidget {
   final String asset;
 
-  const AssetMarkdownBody(this.asset, {Key? key}) : super(key: key);
+  const AssetMarkdownBody(this.asset, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class AssetMarkdownBody extends StatelessWidget {
       future: rootBundle.loadString(asset),
       builder: (context, snap) => MarkdownBody(
         data: snap.data ?? '',
-        onTapLink: (text, href, title) => launch(href ?? ''),
+        onTapLink: (text, href, title) => launchUrlString(href ?? ''),
       ),
     );
   }

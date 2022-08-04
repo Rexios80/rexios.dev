@@ -3,7 +3,7 @@ publish_to: none
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.17.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -21,12 +21,13 @@ dependencies:
       ref: 3ca2b80a1fdc0f3f9859c02fa354e839f4fa4eb3
   github: ^9.0.0
   font_awesome_flutter: ^10.0.0-beta
+  collection: ^1.16.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  rexios_lints: ^1.0.0
+  rexios_lints: ^3.0.0
   flutter_native_splash: ^2.0.1+1
 
 flutter:

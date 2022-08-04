@@ -6,7 +6,7 @@ import 'package:rexios_dev/view/widget/pub/pub_package.dart';
 class PubPackages extends StatelessWidget {
   final _controller = PubController();
 
-  PubPackages({Key? key}) : super(key: key);
+  PubPackages({super.key});
 
   @override
   Widget build(BuildContext context) {

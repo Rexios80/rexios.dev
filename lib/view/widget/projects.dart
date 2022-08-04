@@ -10,7 +10,7 @@ import 'package:rexios_dev/view/widget/pub/pub_packages.dart';
 class Projects extends StatelessWidget {
   final _controller = GetIt.I<GitHubController>();
 
-  Projects({Key? key}) : super(key: key);
+  Projects({super.key});
 
   @override
   Widget build(BuildContext context) {

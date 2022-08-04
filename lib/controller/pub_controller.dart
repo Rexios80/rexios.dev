@@ -30,19 +30,21 @@ class PubController {
     required List<PackageResult> results,
   }) async {
     final infos = <PackageScoreInfo>[];
-    for (final result in results) {
+    final futures = results.map((result) async {
       final options = await _pub.packageOptions(result.package);
 
       // Don't show unlisted or discontinued packages
       if (options.isUnlisted || options.isDiscontinued) {
-        continue;
+        return;
       }
 
       final score = await _pub.packageScore(result.package);
       final info = await _pub.packageInfo(result.package);
       final stars = await _getStars(info);
       infos.add(PackageScoreInfo(score: score, info: info, stars: stars));
-    }
+    });
+
+    await Future.wait(futures);
 
     // Sort by popularity
     return infos.sorted(

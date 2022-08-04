@@ -21,7 +21,7 @@ class GitHubController {
   }
 
   void _init() async {
-    for (var slug in _repos) {
+    for (final slug in _repos) {
       final repo = await _github.getRepository(slug);
       repoMap[slug] = repo;
     }

@@ -7,7 +7,7 @@ class GitHubProjectInfo extends StatelessWidget {
 
   final Repository? repository;
 
-  const GitHubProjectInfo({required this.repository, Key? key}) : super(key: key);
+  const GitHubProjectInfo({required this.repository, super.key});
 
   @override
   Widget build(BuildContext context) {

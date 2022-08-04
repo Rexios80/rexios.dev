@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:rexios_dev/model/package_score_info.dart';
 import 'package:rexios_dev/view/widget/pub/pub_package_score.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:fast_ui/fast_ui.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class PubPackage extends StatelessWidget {
   final PackageScoreInfo package;
 
-  const PubPackage({required this.package, Key? key}) : super(key: key);
+  const PubPackage({required this.package, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 30),
       child: InkWell(
-        onTap: () => launch(package.info.url),
+        onTap: () => launchUrlString(package.info.url),
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Column(
