@@ -7,6 +7,12 @@ import 'package:rexios_dev/model/package_score_info.dart';
 import 'package:rexios_dev/service/github_service.dart';
 
 class PubController {
+  static const _myPublishers = [
+    'rexios.dev',
+    'vrchat.community',
+    'iodesignteam.com',
+  ];
+
   final _pub = PubClient(pubUrl: 'https://proxy.rexios.dev/pub');
   final _github = GetIt.I<GitHubService>();
 
@@ -17,11 +23,13 @@ class PubController {
   }
 
   void _init() async {
-    final rexiosPackages = await _pub.fetchPublisherPackages('rexios.dev');
-    final vrchatPackages =
-        await _pub.fetchPublisherPackages('vrchat.community');
+    final packageResults = <PackageResult>[];
+    for (final publisher in _myPublishers) {
+      final results = await _pub.fetchPublisherPackages(publisher);
+      packageResults.addAll(results);
+    }
     final infos =
-        await _getMetricsInfos(results: rexiosPackages + vrchatPackages);
+        await _getMetricsInfos(results: packageResults);
     packageScoreInfos.clear();
     packageScoreInfos.addAll(infos);
   }
