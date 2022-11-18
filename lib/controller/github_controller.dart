@@ -4,11 +4,7 @@ import 'package:fast_ui/fast_ui.dart';
 import 'package:rexios_dev/service/github_service.dart';
 
 class GitHubController {
-  static final hdsSlug = RepositorySlug(
-    'Rexios80',
-    'Health-Data-Server-Overlay',
-  );
-
+  static final hdsSlug = RepositorySlug('Rexios80', 'hds_overlay');
   static final _repos = [hdsSlug];
 
   final _github = GetIt.I<GitHubService>();
