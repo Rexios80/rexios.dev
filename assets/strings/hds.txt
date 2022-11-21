@@ -1,1 +1,1 @@
-[Health Data Server](https://github.com/Rexios80/hds_overlay) is an application for collecting health data from a smart watch. This data can either be routed to a Twitch stream overlay through the cloud using Firebase and AWS or collected locally for anything you could want.
+[Health Data Server](https://github.com/Rexios80/hds_overlay) is an application for collecting health data from a smart watch. This data can either be routed to a Twitch stream overlay through the cloud using Firebase or collected locally for anything you could want.

@@ -40,7 +40,7 @@ class Projects extends StatelessWidget {
           style: Theme.of(context).textTheme.headline6,
         ),
         Text(
-          '(Flutter/Firebase/AWS/Swift)',
+          '(Flutter/Firebase/SwiftUI)',
           style: Theme.of(context).textTheme.caption,
         ),
         const SizedBox(height: 20),
