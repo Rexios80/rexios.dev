@@ -65,7 +65,7 @@ class Launchpad extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             child: Material(
               color: Colors.black,
-              elevation: 2,
+              elevation: 4,
               shadowColor: Colors.white,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
