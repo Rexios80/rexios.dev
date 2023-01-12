@@ -7,37 +7,29 @@ class Contact extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          'Social Links',
-          style: Theme.of(context).textTheme.headline4,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: const [
+        SocialLink(
+          icon: FontAwesomeIcons.discord,
+          url: 'https://discord.gg/v5yAdrucdG',
         ),
-        const SizedBox(height: 20),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            SocialLink(
-              icon: FontAwesomeIcons.discord,
-              url: 'https://discord.gg/v5yAdrucdG',
-            ),
-            SocialLink(
-              icon: FontAwesomeIcons.github,
-              url: 'https://github.com/Rexios80',
-            ),
-            SocialLink(
-              icon: FontAwesomeIcons.twitter,
-              url: 'https://twitter.com/rexios85',
-            ),
-            SocialLink(
-              icon: FontAwesomeIcons.youtube,
-              url: 'https://www.youtube.com/channel/UCH09mEzK3Tec-yPKbbfQVhQ',
-            ),
-            SocialLink(
-              icon: FontAwesomeIcons.twitch,
-              url: 'https://twitch.tv/rexios85',
-            ),
-          ],
+        SocialLink(
+          icon: FontAwesomeIcons.github,
+          url: 'https://github.com/Rexios80',
+        ),
+        SocialLink(
+          icon: FontAwesomeIcons.twitter,
+          url: 'https://twitter.com/rexios85',
+        ),
+        SocialLink(
+          icon: FontAwesomeIcons.youtube,
+          url: 'https://www.youtube.com/channel/UCH09mEzK3Tec-yPKbbfQVhQ',
+        ),
+        SocialLink(
+          icon: FontAwesomeIcons.twitch,
+          url: 'https://twitch.tv/rexios85',
         ),
       ],
     );

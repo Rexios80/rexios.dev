@@ -27,7 +27,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Rexios',
       darkTheme: ThemeData(
         brightness: Brightness.dark,
         primarySwatch: Colors.orange,
@@ -44,22 +43,36 @@ class Launchpad extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.orange[600],
-        title: const Text('Rexios'),
-      ),
-      body: ListView(
-        padding: const EdgeInsets.all(20),
+      body: Stack(
         children: [
-          Center(
-            child: Container(
-              constraints: const BoxConstraints(maxWidth: 800),
-              child: Column(
-                children: [
-                  Projects(),
-                  const SizedBox(height: 80),
-                  const Contact(),
-                ],
+          ListView(
+            padding: const EdgeInsets.only(
+              top: 40,
+              bottom: 74, // 24 + 5 + 5 + 40
+              left: 20,
+              right: 20,
+            ),
+            children: [
+              Center(
+                child: Container(
+                  constraints: const BoxConstraints(maxWidth: 800),
+                  child: Projects(),
+                ),
+              ),
+            ],
+          ),
+          const Align(
+            alignment: Alignment.bottomCenter,
+            child: Material(
+              color: Colors.black,
+              elevation: 2,
+              shadowColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+              ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                child: Contact(),
               ),
             ),
           ),
