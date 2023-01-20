@@ -16,14 +16,8 @@ final pubHandler = Pipeline()
       proxyHandler('https://pub.dartlang.org', proxyName: 'proxy.rexios.dev'),
     );
 
-final overseerrHandler = Pipeline().addHandler(
-  proxyHandler('http://bull.seedhost.eu:14499', proxyName: 'proxy.rexios.dev'),
-);
-
 void main(List<String> arguments) async {
-  final app = Router()
-    ..mount('/pub', pubHandler)
-    ..mount('/overseerr', overseerrHandler);
+  final app = Router()..mount('/pub', pubHandler);
 
   final port = Platform.environment.containsKey('PORT')
       ? int.parse(Platform.environment['PORT']!)
