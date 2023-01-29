@@ -20,7 +20,7 @@ class PubPackageScore extends StatelessWidget {
               const SizedBox(height: 3),
               Text(
                 'LIKES',
-                style: context.textTheme.caption!.copyWith(fontSize: 8),
+                style: context.textTheme.bodySmall!.copyWith(fontSize: 8),
               ),
             ],
           ),
@@ -31,7 +31,7 @@ class PubPackageScore extends StatelessWidget {
               const SizedBox(height: 3),
               Text(
                 'PUB POINTS',
-                style: context.textTheme.caption!.copyWith(fontSize: 8),
+                style: context.textTheme.bodySmall!.copyWith(fontSize: 8),
               ),
             ],
           ),
@@ -46,7 +46,7 @@ class PubPackageScore extends StatelessWidget {
               const SizedBox(height: 3),
               Text(
                 'POPULARITY',
-                style: context.textTheme.caption!.copyWith(fontSize: 8),
+                style: context.textTheme.bodySmall!.copyWith(fontSize: 8),
               ),
             ],
           ),
@@ -57,7 +57,7 @@ class PubPackageScore extends StatelessWidget {
               const SizedBox(height: 3),
               Text(
                 'STARS',
-                style: context.textTheme.caption!.copyWith(fontSize: 8),
+                style: context.textTheme.bodySmall!.copyWith(fontSize: 8),
               ),
             ],
           ),

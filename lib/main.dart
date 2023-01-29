@@ -67,6 +67,7 @@ class Launchpad extends StatelessWidget {
               color: Colors.black,
               elevation: 4,
               shadowColor: Colors.white,
+              clipBehavior: Clip.antiAlias,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
               ),

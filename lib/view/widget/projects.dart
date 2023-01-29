@@ -19,16 +19,16 @@ class Projects extends StatelessWidget {
         Text(
           'My Projects',
           textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headline4,
+          style: Theme.of(context).textTheme.headlineMedium,
         ),
         const SizedBox(height: 40),
         Text(
           'Project Madad Maps',
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         Text(
           '(Flutter/Firebase)',
-          style: Theme.of(context).textTheme.caption,
+          style: Theme.of(context).textTheme.bodySmall,
         ),
         const SizedBox(height: 20),
         const AssetMarkdownBody('assets/strings/pmm.txt'),
@@ -37,11 +37,11 @@ class Projects extends StatelessWidget {
         const SizedBox(height: 80),
         Text(
           'Health Data Server',
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         Text(
           '(Flutter/Firebase/SwiftUI)',
-          style: Theme.of(context).textTheme.caption,
+          style: Theme.of(context).textTheme.bodySmall,
         ),
         const SizedBox(height: 20),
         Row(
@@ -61,14 +61,14 @@ class Projects extends StatelessWidget {
         const SizedBox(height: 80),
         Text(
           'Dart/Flutter Packages',
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         const SizedBox(height: 20),
         PubPackages(),
         const SizedBox(height: 80),
         Text(
           'Other Projects',
-          style: Theme.of(context).textTheme.headline6,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         const SizedBox(height: 20),
         GitHubProjects(),

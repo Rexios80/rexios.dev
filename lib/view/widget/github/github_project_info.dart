@@ -20,7 +20,7 @@ class GitHubProjectInfo extends StatelessWidget {
               const SizedBox(height: 3),
               Text(
                 'WATCHERS',
-                style: context.textTheme.caption!.copyWith(fontSize: 8),
+                style: context.textTheme.bodySmall!.copyWith(fontSize: 8),
               ),
             ],
           ),
@@ -31,7 +31,7 @@ class GitHubProjectInfo extends StatelessWidget {
               const SizedBox(height: 3),
               Text(
                 'STARS',
-                style: context.textTheme.caption!.copyWith(fontSize: 8),
+                style: context.textTheme.bodySmall!.copyWith(fontSize: 8),
               ),
             ],
           ),
@@ -42,7 +42,7 @@ class GitHubProjectInfo extends StatelessWidget {
               const SizedBox(height: 3),
               Text(
                 'FORKS',
-                style: context.textTheme.caption!.copyWith(fontSize: 8),
+                style: context.textTheme.bodySmall!.copyWith(fontSize: 8),
               ),
             ],
           ),

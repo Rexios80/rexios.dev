@@ -28,8 +28,7 @@ class PubController {
       final results = await _pub.fetchPublisherPackages(publisher);
       packageResults.addAll(results);
     }
-    final infos =
-        await _getMetricsInfos(results: packageResults);
+    final infos = await _getMetricsInfos(results: packageResults);
     packageScoreInfos.clear();
     packageScoreInfos.addAll(infos);
   }

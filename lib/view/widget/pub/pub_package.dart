@@ -24,7 +24,7 @@ class PubPackage extends StatelessWidget {
                 children: [
                   Text(
                     package.info.name,
-                    style: context.textTheme.bodyText2!
+                    style: context.textTheme.bodyMedium!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                   const Spacer(),

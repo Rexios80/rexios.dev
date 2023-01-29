@@ -24,7 +24,7 @@ class GitHubProject extends StatelessWidget {
                 children: [
                   Text(
                     repository.name,
-                    style: context.textTheme.bodyText2!
+                    style: context.textTheme.bodyMedium!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
                   const Spacer(),
