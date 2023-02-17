@@ -15,10 +15,7 @@ dependencies:
   url_launcher: ^6.0.7
   fast_ui: ^0.1.0
   get_it: ^7.2.0
-  pub_api_client:
-    git:
-      url: https://github.com/Rexios80/pub_api_client
-      ref: 3ca2b80a1fdc0f3f9859c02fa354e839f4fa4eb3
+  pub_api_client: ^2.4.0
   github: ^9.0.0
   font_awesome_flutter: ^10.0.0-beta
   collection: ^1.16.0
