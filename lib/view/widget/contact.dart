@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -7,37 +8,51 @@ class Contact extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return const Row(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
-      children: const [
+      children: [
         SocialLink(
-          icon: FontAwesomeIcons.discord,
+          icon: FaIcon(FontAwesomeIcons.discord),
           url: 'https://discord.gg/v5yAdrucdG',
         ),
         SocialLink(
-          icon: FontAwesomeIcons.github,
+          icon: MatrixIcon(),
+          url: 'https://matrix.to/#/@rexios:mozilla.org',
+        ),
+        SocialLink(
+          icon: FaIcon(FontAwesomeIcons.github),
           url: 'https://github.com/Rexios80',
         ),
         SocialLink(
-          icon: FontAwesomeIcons.twitter,
-          url: 'https://twitter.com/rexios85',
-        ),
-        SocialLink(
-          icon: FontAwesomeIcons.youtube,
-          url: 'https://www.youtube.com/channel/UCH09mEzK3Tec-yPKbbfQVhQ',
-        ),
-        SocialLink(
-          icon: FontAwesomeIcons.twitch,
-          url: 'https://twitch.tv/rexios85',
+          icon: FaIcon(FontAwesomeIcons.mastodon),
+          url: 'https://mastodon.social/@Rexios',
         ),
       ],
     );
   }
 }
 
+class MatrixIcon extends StatelessWidget {
+  const MatrixIcon({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8),
+      child: SvgPicture.asset(
+        'assets/images/matrix.svg',
+        colorFilter: const ColorFilter.mode(
+          Colors.white,
+          BlendMode.srcIn,
+        ),
+      ),
+    );
+  }
+}
+
 class SocialLink extends StatelessWidget {
-  final IconData icon;
+  final Widget icon;
   final String url;
 
   const SocialLink({
@@ -49,7 +64,7 @@ class SocialLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: FaIcon(icon),
+      icon: icon,
       padding: EdgeInsets.zero,
       onPressed: () => launchUrlString(url),
     );

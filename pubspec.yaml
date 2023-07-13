@@ -19,6 +19,7 @@ dependencies:
   github: ^9.0.0
   font_awesome_flutter: ^10.0.0-beta
   collection: ^1.16.0
+  flutter_svg: ^2.0.7
 
 dev_dependencies:
   flutter_test:
