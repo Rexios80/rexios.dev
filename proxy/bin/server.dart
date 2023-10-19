@@ -22,7 +22,7 @@ void main(List<String> arguments) async {
   final port = Platform.environment.containsKey('PORT')
       ? int.parse(Platform.environment['PORT']!)
       : 8080;
-  final server = await shelf_io.serve(app, '0.0.0.0', port);
+  final server = await shelf_io.serve(app.call, '0.0.0.0', port);
 
   print('Listening on :${server.port}');
 }
