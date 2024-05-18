@@ -40,11 +40,15 @@ class MatrixIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8),
-      child: SvgPicture.asset(
-        'assets/images/matrix.svg',
-        colorFilter: const ColorFilter.mode(
-          Colors.white,
-          BlendMode.srcIn,
+      child: SizedBox(
+        width: 24,
+        height: 24,
+        child: SvgPicture.asset(
+          'assets/images/matrix.svg',
+          colorFilter: const ColorFilter.mode(
+            Colors.white,
+            BlendMode.srcIn,
+          ),
         ),
       ),
     );
