@@ -27,7 +27,7 @@ class PubPackageScore extends StatelessWidget {
           const VerticalDivider(width: _dividerWidth),
           Column(
             children: [
-              Text(package.score.grantedPoints?.toString() ?? '-'),
+              Text(package.score.grantedPoints.toString()),
               const SizedBox(height: 3),
               Text(
                 'PUB POINTS',
