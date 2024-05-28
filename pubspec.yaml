@@ -20,6 +20,7 @@ dependencies:
   font_awesome_flutter: ^10.0.0-beta
   collection: ^1.16.0
   flutter_svg: ^2.0.7
+  flutter_tools_task_queue: ^1.0.0
 
 dev_dependencies:
   flutter_test:

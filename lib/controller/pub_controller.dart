@@ -1,3 +1,4 @@
+import 'package:flutter_tools_task_queue/flutter_tools_task_queue.dart';
 import 'package:get_it/get_it.dart';
 import 'package:github/github.dart';
 import 'package:pub_api_client/pub_api_client.dart';
@@ -37,21 +38,36 @@ class PubController {
     required List<PackageResult> results,
   }) async {
     final infos = <PackageScoreInfo>[];
-    final futures = results.map((result) async {
-      final options = await _pub.packageOptions(result.package);
 
-      // Don't show unlisted or discontinued packages
-      if (options.isUnlisted || options.isDiscontinued) {
-        return;
+    final queue = TaskQueue(maxJobs: 8);
+    for (final result in results) {
+      try {
+        await queue.add(() async {
+          final options = await _pub
+              .packageOptions(result.package)
+              .timeout(const Duration(seconds: 1));
+
+          // Don't show unlisted or discontinued packages
+          if (options.isUnlisted || options.isDiscontinued) {
+            return;
+          }
+
+          final score = await _pub
+              .packageScore(result.package)
+              .timeout(const Duration(seconds: 1));
+          final info = await _pub
+              .packageInfo(result.package)
+              .timeout(const Duration(seconds: 1));
+          final stars =
+              await _getStars(info).timeout(const Duration(seconds: 1));
+          infos.add(PackageScoreInfo(score: score, info: info, stars: stars));
+        });
+      } catch (e) {
+        // TODO: Fix this?
       }
+    }
 
-      final score = await _pub.packageScore(result.package);
-      final info = await _pub.packageInfo(result.package);
-      final stars = await _getStars(info);
-      infos.add(PackageScoreInfo(score: score, info: info, stars: stars));
-    });
-
-    await Future.wait(futures);
+    await queue.tasksComplete;
 
     // Sort by popularity
     return infos.sorted(
