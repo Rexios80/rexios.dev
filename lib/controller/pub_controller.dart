@@ -16,7 +16,7 @@ class PubController {
     'iodesignteam.com',
   ];
 
-  final _pub = PubClient(pubUrl: 'https://proxy.rexios.dev/pub', debug: true);
+  final _pub = PubClient(pubUrl: 'https://proxy.rexios.dev/pub');
   final _github = GetIt.I<GitHubService>();
 
   final packageScoreInfos = RxList<PackageScoreInfo>();
