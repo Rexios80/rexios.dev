@@ -38,6 +38,7 @@ class GitHubController {
               // Special string to force ignore a repo
               !repo.description.contains('rexios.dev:ignore'),
         )
+        .take(5)
         .listen(otherRepos.add);
     await stream.last;
     otherRepos.sort((a, b) => b.stargazersCount.compareTo(a.stargazersCount));

@@ -67,7 +67,7 @@ class Projects extends StatelessWidget {
         PubPackages(),
         const SizedBox(height: 80),
         Text(
-          'Other Projects',
+          'Top GitHub Projects',
           style: Theme.of(context).textTheme.titleLarge,
         ),
         const SizedBox(height: 20),
