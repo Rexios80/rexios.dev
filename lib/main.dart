@@ -2,6 +2,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:platform_plus/platform_plus.dart';
 import 'package:rexios_dev/controller/github_controller.dart';
 import 'package:rexios_dev/firebase_options.dart';
 import 'package:rexios_dev/service/github_service.dart';
@@ -42,6 +43,8 @@ class Launchpad extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final rendererString = PlatformPlus.platform.webRenderer.name.toUpperCase();
+
     return Scaffold(
       body: Stack(
         children: [
@@ -59,6 +62,8 @@ class Launchpad extends StatelessWidget {
                   child: Projects(),
                 ),
               ),
+              const SizedBox(height: 32),
+              Center(child: Text('Rendered with $rendererString')),
             ],
           ),
           const Align(
