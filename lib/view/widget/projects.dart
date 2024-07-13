@@ -60,7 +60,7 @@ class Projects extends StatelessWidget {
         Image.asset('assets/images/hds.gif'),
         const SizedBox(height: 80),
         Text(
-          'Dart/Flutter Packages',
+          'Top Dart/Flutter Packages',
           style: Theme.of(context).textTheme.titleLarge,
         ),
         const SizedBox(height: 20),
