@@ -1,0 +1,22 @@
+{
+	auto_https off
+}
+
+http://proxy.rexios.dev:{$PORT}
+
+handle_path /pub/* {
+	rewrite /pub /
+
+	reverse_proxy https://pub.dev {
+		header_up Host {upstream_hostport}
+	}
+
+	@originRexios {
+		header Origin https://rexios.dev
+	}
+	@originBetaRexios {
+		header Origin https://beta.rexios.dev
+	}
+	header @originRexios Access-Control-Allow-Origin https://rexios.dev
+	header @originBetaRexios Access-Control-Allow-Origin https://beta.rexios.dev
+}
