@@ -49,6 +49,9 @@ class Launchpad extends StatelessWidget {
       body: Stack(
         children: [
           ListView(
+            // Fix for erratic scroll bar behavior
+            // See https://github.com/flutter/flutter/issues/25652#issuecomment-2199882727
+            cacheExtent: 10000,
             padding: const EdgeInsets.only(
               top: 40,
               bottom: 74, // 24 + 5 + 5 + 40
