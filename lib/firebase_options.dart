@@ -19,7 +19,6 @@ class DefaultFirebaseOptions {
     if (kIsWeb) {
       return web;
     }
-    // ignore: missing_enum_constant_in_switch
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;

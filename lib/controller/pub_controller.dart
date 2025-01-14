@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_tools_task_queue/flutter_tools_task_queue.dart';
 import 'package:get_it/get_it.dart';
 import 'package:github/github.dart';
@@ -58,10 +59,9 @@ class PubController {
 
     final infos = <PackageScoreInfo>[];
     final sortedScores = scores.entries
-        .where((e) => e.value.popularityScore != null)
         .sorted(
-          (a, b) =>
-              b.value.popularityScore!.compareTo(a.value.popularityScore!),
+          (a, b) => b.value.downloadCount30Days
+              .compareTo(a.value.downloadCount30Days),
         )
         .toList();
 
@@ -82,7 +82,7 @@ class PubController {
                 await _getStars(info).timeout(const Duration(seconds: 1));
             infos.add(PackageScoreInfo(score: score, info: info, stars: stars));
           } catch (e) {
-            print('Error getting package info for $package: $e');
+            debugPrint('Error getting package info for $package: $e');
             packageCount++;
           }
         }),
@@ -94,8 +94,7 @@ class PubController {
     // Sort by popularity
     return infos.sorted(
       (a, b) =>
-          b.score.popularityScore?.compareTo(a.score.popularityScore ?? -1) ??
-          -1,
+          b.score.downloadCount30Days.compareTo(a.score.downloadCount30Days),
     );
   }
 
