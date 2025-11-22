@@ -76,8 +76,9 @@ class PubController {
             final info = await _pub
                 .packageInfo(package)
                 .timeout(const Duration(seconds: 1));
-            final stars =
-                await _getStars(info).timeout(const Duration(seconds: 1));
+            final stars = await _getStars(
+              info,
+            ).timeout(const Duration(seconds: 1));
             infos.add(PackageScoreInfo(score: score, info: info, stars: stars));
           } catch (e) {
             debugPrint('Error getting package info for $package: $e');
@@ -97,8 +98,10 @@ class PubController {
   }
 
   Future<int> _getStars(PubPackage package) async {
-    final gitHubPath =
-        package.latestPubspec.homepage?.replaceAll('https://github.com/', '');
+    final gitHubPath = package.latestPubspec.homepage?.replaceAll(
+      'https://github.com/',
+      '',
+    );
     if (gitHubPath == null) return 0;
     final split = gitHubPath.split('/');
 

@@ -25,8 +25,9 @@ class PubPackage extends StatelessWidget {
                 children: [
                   Text(
                     package.info.name,
-                    style: textTheme.bodyMedium
-                        ?.copyWith(fontWeight: FontWeight.bold),
+                    style: textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const Spacer(),
                   PubPackageScore(package: package),

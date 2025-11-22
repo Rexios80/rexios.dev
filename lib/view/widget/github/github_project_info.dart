@@ -30,10 +30,7 @@ class GitHubProjectInfo extends StatelessWidget {
             children: [
               Text(repository?.stargazersCount.toString() ?? '0'),
               const SizedBox(height: 3),
-              Text(
-                'STARS',
-                style: textTheme.bodySmall?.copyWith(fontSize: 8),
-              ),
+              Text('STARS', style: textTheme.bodySmall?.copyWith(fontSize: 8)),
             ],
           ),
           const VerticalDivider(width: _dividerWidth),
@@ -41,10 +38,7 @@ class GitHubProjectInfo extends StatelessWidget {
             children: [
               Text(repository?.forksCount.toString() ?? '0'),
               const SizedBox(height: 3),
-              Text(
-                'FORKS',
-                style: textTheme.bodySmall?.copyWith(fontSize: 8),
-              ),
+              Text('FORKS', style: textTheme.bodySmall?.copyWith(fontSize: 8)),
             ],
           ),
         ],

@@ -45,10 +45,7 @@ class MatrixIcon extends StatelessWidget {
         height: 24,
         child: SvgPicture.asset(
           'assets/images/matrix.svg',
-          colorFilter: const ColorFilter.mode(
-            Colors.white,
-            BlendMode.srcIn,
-          ),
+          colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
         ),
       ),
     );
@@ -59,11 +56,7 @@ class SocialLink extends StatelessWidget {
   final Widget icon;
   final String url;
 
-  const SocialLink({
-    super.key,
-    required this.icon,
-    required this.url,
-  });
+  const SocialLink({super.key, required this.icon, required this.url});
 
   @override
   Widget build(BuildContext context) {

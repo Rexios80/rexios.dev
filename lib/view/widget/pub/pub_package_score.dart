@@ -20,10 +20,7 @@ class PubPackageScore extends StatelessWidget {
             children: [
               Text(package.score.likeCount.toString()),
               const SizedBox(height: 3),
-              Text(
-                'LIKES',
-                style: textTheme.bodySmall?.copyWith(fontSize: 8),
-              ),
+              Text('LIKES', style: textTheme.bodySmall?.copyWith(fontSize: 8)),
             ],
           ),
           const VerticalDivider(width: _dividerWidth),
@@ -53,10 +50,7 @@ class PubPackageScore extends StatelessWidget {
             children: [
               Text(package.stars.toString()),
               const SizedBox(height: 3),
-              Text(
-                'STARS',
-                style: textTheme.bodySmall?.copyWith(fontSize: 8),
-              ),
+              Text('STARS', style: textTheme.bodySmall?.copyWith(fontSize: 8)),
             ],
           ),
         ],
