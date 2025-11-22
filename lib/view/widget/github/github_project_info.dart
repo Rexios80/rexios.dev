@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:github/github.dart';
+import 'package:rexios_dev/view/widget/item_stat.dart';
 
 class GitHubProjectInfo extends StatelessWidget {
   static const _dividerWidth = 10.0;
@@ -10,36 +11,22 @@ class GitHubProjectInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = TextTheme.of(context);
-
     return IntrinsicHeight(
       child: Row(
         children: [
-          Column(
-            children: [
-              Text(repository?.subscribersCount.toString() ?? '0'),
-              const SizedBox(height: 3),
-              Text(
-                'WATCHERS',
-                style: textTheme.bodySmall?.copyWith(fontSize: 8),
-              ),
-            ],
+          ItemStat(
+            label: 'WATCHERS',
+            value: repository?.subscribersCount.toString() ?? '0',
           ),
           const VerticalDivider(width: _dividerWidth),
-          Column(
-            children: [
-              Text(repository?.stargazersCount.toString() ?? '0'),
-              const SizedBox(height: 3),
-              Text('STARS', style: textTheme.bodySmall?.copyWith(fontSize: 8)),
-            ],
+          ItemStat(
+            label: 'STARS',
+            value: repository?.stargazersCount.toString() ?? '0',
           ),
           const VerticalDivider(width: _dividerWidth),
-          Column(
-            children: [
-              Text(repository?.forksCount.toString() ?? '0'),
-              const SizedBox(height: 3),
-              Text('FORKS', style: textTheme.bodySmall?.copyWith(fontSize: 8)),
-            ],
+          ItemStat(
+            label: 'FORKS',
+            value: repository?.forksCount.toString() ?? '0',
           ),
         ],
       ),
