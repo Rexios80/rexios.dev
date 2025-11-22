@@ -59,10 +59,8 @@ class PubController {
 
     final infos = <PackageScoreInfo>[];
     final sortedScores = scores.entries
-        .sorted(
-          (a, b) => b.value.downloadCount30Days
-              .compareTo(a.value.downloadCount30Days),
-        )
+        .sortedBy<num>((e) => e.value.downloadCount30Days ?? 0)
+        .reversed
         .toList();
 
     // There is a variable number of packages to parse depending on if any fail
@@ -92,10 +90,10 @@ class PubController {
     await queue.tasksComplete;
 
     // Sort by popularity
-    return infos.sorted(
-      (a, b) =>
-          b.score.downloadCount30Days.compareTo(a.score.downloadCount30Days),
-    );
+    return infos
+        .sortedBy<num>((e) => e.score.downloadCount30Days ?? 0)
+        .reversed
+        .toList();
   }
 
   Future<int> _getStars(PubPackage package) async {
