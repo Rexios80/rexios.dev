@@ -6,7 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'package:github/github.dart';
 import 'package:pub_api_client/pub_api_client.dart';
 import 'package:collection/collection.dart';
-import 'package:fast_ui/fast_ui.dart';
+import 'package:fast_rx_flutter/fast_rx_flutter.dart';
 import 'package:rexios_dev/model/package_score_info.dart';
 import 'package:rexios_dev/service/github_service.dart';
 

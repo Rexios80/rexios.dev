@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:github/github.dart';
 import 'package:rexios_dev/view/widget/github/github_project_info.dart';
-import 'package:fast_ui/fast_ui.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class GitHubProject extends StatelessWidget {
@@ -11,6 +10,8 @@ class GitHubProject extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = TextTheme.of(context);
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 30),
       child: InkWell(
@@ -24,8 +25,8 @@ class GitHubProject extends StatelessWidget {
                 children: [
                   Text(
                     repository.name,
-                    style: context.textTheme.bodyMedium!
-                        .copyWith(fontWeight: FontWeight.bold),
+                    style: textTheme.bodyMedium
+                        ?.copyWith(fontWeight: FontWeight.bold),
                   ),
                   const Spacer(),
                   GitHubProjectInfo(repository: repository),

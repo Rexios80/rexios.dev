@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:github/github.dart';
-import 'package:fast_ui/fast_ui.dart';
+import 'package:fast_rx_flutter/fast_rx_flutter.dart';
 import 'package:rexios_dev/service/github_service.dart';
 
 class GitHubController {

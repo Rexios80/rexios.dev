@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fast_ui/fast_ui.dart';
 import 'package:rexios_dev/model/package_score_info.dart';
 import 'package:rexios_dev/util/format_utils.dart';
 
@@ -12,6 +11,8 @@ class PubPackageScore extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = TextTheme.of(context);
+
     return IntrinsicHeight(
       child: Row(
         children: [
@@ -21,7 +22,7 @@ class PubPackageScore extends StatelessWidget {
               const SizedBox(height: 3),
               Text(
                 'LIKES',
-                style: context.textTheme.bodySmall!.copyWith(fontSize: 8),
+                style: textTheme.bodySmall?.copyWith(fontSize: 8),
               ),
             ],
           ),
@@ -32,7 +33,7 @@ class PubPackageScore extends StatelessWidget {
               const SizedBox(height: 3),
               Text(
                 'PUB POINTS',
-                style: context.textTheme.bodySmall!.copyWith(fontSize: 8),
+                style: textTheme.bodySmall?.copyWith(fontSize: 8),
               ),
             ],
           ),
@@ -43,7 +44,7 @@ class PubPackageScore extends StatelessWidget {
               const SizedBox(height: 3),
               Text(
                 'DOWNLOADS',
-                style: context.textTheme.bodySmall!.copyWith(fontSize: 8),
+                style: textTheme.bodySmall?.copyWith(fontSize: 8),
               ),
             ],
           ),
@@ -54,7 +55,7 @@ class PubPackageScore extends StatelessWidget {
               const SizedBox(height: 3),
               Text(
                 'STARS',
-                style: context.textTheme.bodySmall!.copyWith(fontSize: 8),
+                style: textTheme.bodySmall?.copyWith(fontSize: 8),
               ),
             ],
           ),

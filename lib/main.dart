@@ -60,7 +60,7 @@ class Launchpad extends StatelessWidget {
             ),
             children: [
               Center(
-                child: Container(
+                child: ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 800),
                   child: Projects(),
                 ),

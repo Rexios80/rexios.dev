@@ -1,4 +1,4 @@
-import 'package:fast_ui/fast_ui.dart';
+import 'package:fast_rx_flutter/fast_rx_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:rexios_dev/controller/pub_controller.dart';
 import 'package:rexios_dev/view/widget/pub/pub_package.dart';

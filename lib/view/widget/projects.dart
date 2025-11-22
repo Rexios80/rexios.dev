@@ -1,4 +1,4 @@
-import 'package:fast_ui/fast_ui.dart';
+import 'package:fast_rx_flutter/fast_rx_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:rexios_dev/controller/github_controller.dart';
@@ -14,21 +14,23 @@ class Projects extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = TextTheme.of(context);
+
     return Column(
       children: [
         Text(
           'My Projects',
           textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headlineMedium,
+          style: textTheme.headlineMedium,
         ),
         const SizedBox(height: 40),
         Text(
           'Project Madad Maps',
-          style: Theme.of(context).textTheme.titleLarge,
+          style: textTheme.titleLarge,
         ),
         Text(
           '(Flutter/Firebase)',
-          style: Theme.of(context).textTheme.bodySmall,
+          style: textTheme.bodySmall,
         ),
         const SizedBox(height: 20),
         const AssetMarkdownBody('assets/strings/pmm.txt'),
@@ -37,11 +39,11 @@ class Projects extends StatelessWidget {
         const SizedBox(height: 80),
         Text(
           'Health Data Server',
-          style: Theme.of(context).textTheme.titleLarge,
+          style: textTheme.titleLarge,
         ),
         Text(
           '(Flutter/Firebase/SwiftUI)',
-          style: Theme.of(context).textTheme.bodySmall,
+          style: textTheme.bodySmall,
         ),
         const SizedBox(height: 20),
         Row(
@@ -61,14 +63,14 @@ class Projects extends StatelessWidget {
         const SizedBox(height: 80),
         Text(
           'Top Dart/Flutter Packages',
-          style: Theme.of(context).textTheme.titleLarge,
+          style: textTheme.titleLarge,
         ),
         const SizedBox(height: 20),
         PubPackages(),
         const SizedBox(height: 80),
         Text(
           'Top GitHub Projects',
-          style: Theme.of(context).textTheme.titleLarge,
+          style: textTheme.titleLarge,
         ),
         const SizedBox(height: 20),
         GitHubProjects(),
