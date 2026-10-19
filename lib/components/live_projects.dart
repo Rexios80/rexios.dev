@@ -48,7 +48,6 @@ class LiveProjects extends StatelessComponent {
           href: package.url,
           stats: [
             (label: 'LIKES', value: '${package.likes}'),
-            (label: 'PUB POINTS', value: '${package.points}'),
             (label: 'DOWNLOADS', value: formatLargeNum(package.downloads)),
             (label: 'STARS', value: '${package.stars}'),
           ],

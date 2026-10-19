@@ -33,7 +33,6 @@ class PackageInfo {
     required this.description,
     required this.url,
     required this.likes,
-    required this.points,
     required this.downloads,
     required this.stars,
   });
@@ -42,7 +41,6 @@ class PackageInfo {
   final String description;
   final String url;
   final int likes;
-  final int points;
   final int downloads;
   final int stars;
 }

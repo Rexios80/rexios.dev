@@ -9,6 +9,7 @@ const _pubApiRoot = 'https://pub.dev/api';
 
 const _publishers = ['rexios.dev', 'vrchat.community', 'iodesignteam.com'];
 const _featuredRepo = 'Rexios80/hds_overlay';
+const _featuredPackage = 'hive_ce';
 const _githubUser = 'Rexios80';
 const _xUser = 'Rexios85';
 const _discordInvite = 'v5yAdrucdG';
@@ -19,12 +20,14 @@ const _maxConcurrent = 8;
 class PortfolioData {
   const PortfolioData({
     required this.hds,
+    required this.hiveCe,
     required this.repositories,
     required this.packages,
     required this.profiles,
   });
 
   final RepoInfo hds;
+  final PackageInfo hiveCe;
   final List<RepoInfo> repositories;
   final List<PackageInfo> packages;
   final ProfileStats profiles;
@@ -42,13 +45,20 @@ Future<PortfolioData> loadPortfolio() async {
 
   final client = http.Client();
   try {
-    final (hds, repositories, packages, profiles) = await (
+    final (hds, hiveCe, repositories, packages, profiles) = await (
       _fetchHds(client),
+      _fetchFeaturedPackage(client),
       _fetchOtherRepos(client),
       _fetchTopPackages(client),
       _fetchProfiles(client),
     ).wait;
-    final data = PortfolioData(hds: hds, repositories: repositories, packages: packages, profiles: profiles);
+    final data = PortfolioData(
+      hds: hds,
+      hiveCe: hiveCe,
+      repositories: repositories,
+      packages: packages,
+      profiles: profiles,
+    );
     _cache = data;
     _cacheTime = DateTime.now();
     return data;
@@ -147,10 +157,9 @@ bool _includeRepo(Map<String, dynamic> json) {
 }
 
 class _Score {
-  const _Score({required this.likes, required this.points, required this.downloads});
+  const _Score({required this.likes, required this.downloads});
 
   final int likes;
-  final int points;
   final int downloads;
 }
 
@@ -159,7 +168,8 @@ Future<List<PackageInfo>> _fetchTopPackages(http.Client client) async {
   final seen = <String>{};
   for (final publisher in _publishers) {
     for (final name in await _publisherPackages(client, publisher)) {
-      if (seen.add(name)) names.add(name);
+      if (_isHiveCePackage(name) || !seen.add(name)) continue;
+      names.add(name);
     }
   }
 
@@ -177,6 +187,13 @@ Future<List<PackageInfo>> _fetchTopPackages(http.Client client) async {
   ]);
   packages.sort((a, b) => b.downloads.compareTo(a.downloads));
   return packages;
+}
+
+bool _isHiveCePackage(String name) => name == _featuredPackage || name.startsWith('${_featuredPackage}_');
+
+Future<PackageInfo> _fetchFeaturedPackage(http.Client client) async {
+  final score = await _fetchScore(client, _featuredPackage);
+  return _fetchPackage(client, _featuredPackage, score, {});
 }
 
 Future<List<String>> _publisherPackages(http.Client client, String publisher) async {
@@ -204,12 +221,11 @@ Future<List<String>> _publisherPackages(http.Client client, String publisher) as
 Future<_Score> _fetchScore(http.Client client, String name) async {
   final json = _asMap(await _getJson(client, Uri.parse('$_pubApiRoot/packages/$name/score')));
   final likes = json['likeCount'];
-  final points = json['grantedPoints'];
   final downloads = json['downloadCount30Days'];
-  if (likes is! num || points is! num || downloads is! num) {
+  if (likes is! num || downloads is! num) {
     throw FormatException('Incomplete score for $name');
   }
-  return _Score(likes: likes.toInt(), points: points.toInt(), downloads: downloads.toInt());
+  return _Score(likes: likes.toInt(), downloads: downloads.toInt());
 }
 
 Future<PackageInfo> _fetchPackage(
@@ -226,7 +242,6 @@ Future<PackageInfo> _fetchPackage(
     description: pubspec['description'] as String? ?? '',
     url: 'https://pub.dev/packages/$name',
     likes: score.likes,
-    points: score.points,
     downloads: score.downloads,
     stars: await _starsFor(client, homepage, starRequests),
   );
