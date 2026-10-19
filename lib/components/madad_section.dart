@@ -11,7 +11,7 @@ class MadadSection extends StatelessComponent {
       p(classes: 'section-subtitle', [.text('(Flutter/Firebase)')]),
       p(classes: 'project-copy', [
         a(
-          href: 'https://madadmaps.com',
+          href: 'https://beta.madadmaps.com',
           target: .blank,
           referrerPolicy: .noReferrer,
           attributes: {'rel': 'noopener noreferrer'},
