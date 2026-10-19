@@ -1,3 +1,7 @@
+import 'dart:async';
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 import 'package:rexios_dev/data/models.dart';
@@ -44,23 +48,79 @@ class ContactBar extends StatelessComponent {
           ],
         ],
       ),
-      ContactCard(
+      DiscordCard(
         href: discord.href,
-        label: '${discord.name}, ${discord.online} online, ${discord.members} members',
         name: discord.name,
-        icon: const BrandIcon([_discordPath], viewBox: '0 2.853 24 18.293'),
-        stats: [
-          [
-            span(classes: 'presence', attributes: {'aria-hidden': 'true'}, []),
-            .text('${discord.online}'),
-          ],
-          [
-            span(classes: 'presence members', attributes: {'aria-hidden': 'true'}, []),
-            .text('${discord.members}'),
-          ],
-        ],
+        online: discord.online,
+        members: discord.members,
       ),
     ]);
+  }
+}
+
+@client
+class DiscordCard extends StatefulComponent {
+  const DiscordCard({required this.href, required this.name, required this.online, required this.members, super.key});
+
+  final String href;
+  final String name;
+  final int online;
+  final int members;
+
+  @override
+  State<DiscordCard> createState() => _DiscordCardState();
+}
+
+class _DiscordCardState extends State<DiscordCard> {
+  late int _online;
+  late int _members;
+
+  @override
+  void initState() {
+    super.initState();
+    _online = component.online;
+    _members = component.members;
+    if (kIsWeb) unawaited(_refresh());
+  }
+
+  Future<void> _refresh() async {
+    try {
+      final response = await http.get(
+        Uri.https('discord.com', '/api/v10/invites/$_discordInvite', {'with_counts': 'true'}),
+      );
+      if (response.statusCode != 200 || !mounted) return;
+      final data = jsonDecode(response.body);
+      if (data is! Map) return;
+      final online = data['approximate_presence_count'];
+      final members = data['approximate_member_count'];
+      if (online is! int || members is! int || !mounted) return;
+      setState(() {
+        _online = online;
+        _members = members;
+      });
+    } on Object {
+      // Keep the counts written at build time.
+    }
+  }
+
+  @override
+  Component build(BuildContext context) {
+    return ContactCard(
+      href: component.href,
+      label: '${component.name}, $_online online, $_members members',
+      name: component.name,
+      icon: const BrandIcon([_discordPath], viewBox: '0 2.853 24 18.293'),
+      stats: [
+        [
+          span(classes: 'presence', attributes: {'aria-hidden': 'true'}, []),
+          .text('$_online'),
+        ],
+        [
+          span(classes: 'presence members', attributes: {'aria-hidden': 'true'}, []),
+          .text('$_members'),
+        ],
+      ],
+    );
   }
 }
 
@@ -144,6 +204,8 @@ class BrandIcon extends StatelessComponent {
     );
   }
 }
+
+const _discordInvite = 'v5yAdrucdG';
 
 const _followersPath = [
   'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2',
