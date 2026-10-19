@@ -14,20 +14,32 @@ class LiveProjects extends StatelessComponent {
   @override
   Component build(BuildContext context) {
     return .fragment([
-      FeaturedProject(
-        title: 'Health Data Server',
-        stack: 'Flutter/Firebase/SwiftUI',
-        description:
-            'An application for collecting health data from a smart watch. This data can either be routed to a Twitch stream overlay through the cloud using Firebase or collected locally for anything you could want.',
-        href: 'https://github.com/Rexios80/hds_overlay',
-        imageSrc: 'images/hds.gif',
-        imageAlt: 'Health Data Server',
-        stats: [
-          (label: 'WATCHERS', value: '${repository.watchers}'),
-          (label: 'STARS', value: '${repository.stars}'),
-          (label: 'FORKS', value: '${repository.forks}'),
-        ],
-      ),
+      section(classes: 'project-section', [
+        h2(classes: 'section-title', [.text('Health Data Server')]),
+        p(classes: 'section-subtitle', [.text('(Flutter/Firebase/SwiftUI)')]),
+        div(classes: 'stats-center', [
+          Stats(
+            items: [
+              (label: 'WATCHERS', value: '${repository.watchers}'),
+              (label: 'STARS', value: '${repository.stars}'),
+              (label: 'FORKS', value: '${repository.forks}'),
+            ],
+          ),
+        ]),
+        p(classes: 'project-copy', [
+          a(
+            href: 'https://github.com/Rexios80/hds_overlay',
+            target: .blank,
+            referrerPolicy: .noReferrer,
+            attributes: {'rel': 'noopener noreferrer'},
+            [.text('Health Data Server')],
+          ),
+          .text(
+            ' is an application for collecting health data from a smart watch. This data can either be routed to a Twitch stream overlay through the cloud using Firebase or collected locally for anything you could want.',
+          ),
+        ]),
+        img(classes: 'project-image', src: 'images/hds.gif', alt: 'Health Data Server'),
+      ]),
       section(classes: 'project-section', [
         h2(classes: 'section-title', [.text('Top Dart/Flutter Packages')]),
         _packageList(),

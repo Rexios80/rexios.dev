@@ -4,12 +4,13 @@ const _orange = Color('#FFB74D');
 const _background = Color('#121212');
 const _muted = Color.rgba(255, 255, 255, 0.7);
 const _divider = Color.rgba(255, 255, 255, 0.38);
-const _line = Color.rgba(255, 255, 255, 0.16);
 const _hover = Color.rgba(255, 255, 255, 0.08);
+const _track = Color.rgba(255, 255, 255, 0.15);
 
 @css
 List<StyleRule> get styles => [
   css.import('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap'),
+  css.keyframes('rexios-spin', {'to': Styles(transform: .rotate(360.deg))}),
   css('*, *::before, *::after').styles(boxSizing: .borderBox),
   css('html, body').styles(
     width: 100.percent,
@@ -28,87 +29,61 @@ List<StyleRule> get styles => [
   css('a:visited').styles(color: _orange),
   css('.page').styles(
     width: 100.percent,
-    maxWidth: 1040.px,
+    maxWidth: 800.px,
     padding: .only(top: 40.px, right: 20.px, bottom: 96.px, left: 20.px),
     margin: .symmetric(horizontal: .auto),
-    raw: {'padding-bottom': 'calc(96px + env(safe-area-inset-bottom))'},
   ),
   css('.page-title').styles(
-    textAlign: .start,
+    margin: .only(bottom: 40.px),
+    textAlign: .center,
     fontSize: 28.px,
     fontWeight: .w400,
     lineHeight: 36.px,
   ),
-  css('.page-intro').styles(
-    margin: .only(top: 8.px, bottom: 48.px),
-    color: _muted,
-  ),
-  css('.project-section + .project-section').styles(margin: .only(top: 48.px)),
+  css('.project-section + .project-section').styles(margin: .only(top: 80.px)),
   css('.section-title').styles(
     margin: .zero,
-    textAlign: .start,
+    textAlign: .center,
     fontSize: 22.px,
     fontWeight: .w400,
     lineHeight: 28.px,
   ),
   css('.section-subtitle').styles(
-    margin: .only(top: 4.px),
+    margin: .zero,
     color: _muted,
-    textAlign: .start,
+    textAlign: .center,
     fontSize: 12.px,
     lineHeight: 16.px,
   ),
-  css('.featured').styles(
-    display: .flex,
-    flexDirection: .column,
-    gap: .all(24.px),
-  ),
-  css('.featured-body').styles(display: .flex, flexDirection: .column),
-  css('.featured-media', [
-    css('&, &:visited').styles(
-      display: .block,
-      border: .all(color: _line, width: 1.px),
-      radius: .all(.circular(8.px)),
-      overflow: .hidden,
-      cursor: .pointer,
-      lineHeight: .zero,
-    ),
-    css('&:hover').styles(
-      border: .all(color: _orange, width: 1.px),
-    ),
-  ]),
   css('.project-copy').styles(
-    margin: .only(top: 16.px),
+    margin: .only(top: 20.px),
     fontSize: 14.px,
     lineHeight: 20.px,
   ),
-  css('.featured-body .stats').styles(margin: .only(top: 16.px)),
-  css('.project-image').styles(display: .block, width: 100.percent, height: .auto),
-  css('.project-list').styles(
-    display: .flex,
-    margin: .only(top: 20.px),
-    flexDirection: .column,
-    gap: .all(12.px),
+  css('.project-image').styles(
+    display: .block,
+    height: .auto,
+    maxWidth: 100.percent,
+    margin: .only(top: 20.px, right: .auto, left: .auto),
   ),
+  css('.project-list').styles(margin: .only(top: 20.px)),
   css('.project-card', [
     css('&, &:visited').styles(
       display: .block,
-      padding: .all(16.px),
-      border: .all(color: _line, width: 1.px),
+      padding: .all(10.px),
+      margin: .only(bottom: 30.px),
       radius: .all(.circular(8.px)),
       cursor: .pointer,
       color: .inherit,
       textDecoration: .none,
     ),
-    css('&:hover').styles(
-      border: .all(color: _divider, width: 1.px),
-      backgroundColor: _hover,
-    ),
+    css('&:hover').styles(backgroundColor: _hover),
   ]),
   css('.project-card-header').styles(
     display: .flex,
-    flexDirection: .column,
-    alignItems: .start,
+    flexWrap: .wrap,
+    justifyContent: .spaceBetween,
+    alignItems: .center,
     gap: .all(8.px),
   ),
   css('.project-name').styles(
@@ -121,19 +96,37 @@ List<StyleRule> get styles => [
     fontSize: 14.px,
     lineHeight: 20.px,
   ),
-  css('.stats').styles(
+  css('.stats-center').styles(
     display: .flex,
-    flexWrap: .wrap,
-    alignItems: .stretch,
-    gap: .all(16.px),
+    margin: .only(top: 20.px),
+    justifyContent: .center,
   ),
+  css('.stats').styles(display: .flex, flexWrap: .wrap, alignItems: .stretch),
   css('.stat').styles(display: .flex, flexDirection: .column, alignItems: .center),
-  css('.stat-value').styles(fontSize: 14.px, fontWeight: .w700, lineHeight: 18.px),
+  css('.stat + .stat').styles(
+    padding: .only(left: 5.px),
+    margin: .only(left: 5.px),
+    border: .only(
+      left: .solid(color: _divider, width: 1.px),
+    ),
+  ),
   css('.stat-label').styles(
-    margin: .only(top: 2.px),
-    color: _muted,
-    fontSize: 12.px,
-    lineHeight: 16.px,
+    margin: .only(top: 3.px),
+    fontSize: 8.px,
+    lineHeight: 10.px,
+  ),
+  css('.status-text').styles(
+    margin: .only(top: 20.px),
+    textAlign: .center,
+  ),
+  css('.spinner').styles(
+    display: .block,
+    width: 36.px,
+    height: 36.px,
+    margin: .symmetric(vertical: 24.px, horizontal: .auto),
+    border: .all(color: _track, width: 4.px),
+    radius: .all(.circular(50.percent)),
+    raw: {'border-top-color': '#FF9800', 'animation': 'rexios-spin 0.8s linear infinite'},
   ),
   css('.built-with').styles(
     display: .flex,
@@ -146,15 +139,12 @@ List<StyleRule> get styles => [
     position: .fixed(bottom: 0.px, left: 50.percent),
     zIndex: ZIndex(2),
     width: .maxContent,
-    padding: .only(top: 5.px, right: 10.px, left: 10.px),
-    border: .only(
-      top: .solid(color: _line, width: 1.px),
-    ),
+    padding: .symmetric(vertical: 5.px, horizontal: 10.px),
     radius: .only(topLeft: .circular(20.px), topRight: .circular(20.px)),
+    shadow: BoxShadow(offsetX: 0.px, offsetY: (-4).px, blur: 8.px, color: Color.rgba(255, 255, 255, 0.35)),
     transform: .translate(x: (-50).percent),
     justifyContent: .center,
     backgroundColor: Colors.black,
-    raw: {'padding-bottom': 'calc(5px + env(safe-area-inset-bottom))'},
   ),
   css('.social-link', [
     css('&, &:visited').styles(
@@ -180,19 +170,7 @@ List<StyleRule> get styles => [
     whiteSpace: .noWrap,
     raw: {'clip': 'rect(0, 0, 0, 0)', 'clip-path': 'inset(50%)'},
   ),
-  css.media(.screen(minWidth: 840.px), [
-    css('.featured').styles(
-      flexDirection: .rowReverse,
-      alignItems: .center,
-      gap: .all(32.px),
-    ),
-    css('.featured-body').styles(
-      minWidth: Unit.zero,
-      flex: const Flex(grow: 1, shrink: 1, basis: Unit.zero),
-    ),
-    css('.featured-media').styles(
-      minWidth: Unit.zero,
-      flex: const Flex(grow: 1.25, shrink: 1, basis: Unit.zero),
-    ),
+  css.media(.screen(maxWidth: 640.px), [
+    css('.project-card-header').styles(flexDirection: .column, alignItems: .start),
   ]),
 ];
