@@ -16,7 +16,15 @@ class App extends AsyncStatelessComponent {
         h1(classes: 'page-title', [.text('My Projects')]),
         const MadadSection(),
         LiveProjects(repository: data.hds, repositories: data.repositories, packages: data.packages),
-        p(classes: 'rendered-with', [.text('Rendered with Jaspr')]),
+        div(classes: 'built-with', [
+          a(
+            href: 'https://jaspr.site',
+            target: .blank,
+            referrerPolicy: .noReferrer,
+            attributes: {'rel': 'noopener noreferrer'},
+            [const JasprBadge.light()],
+          ),
+        ]),
       ]),
       const ContactBar(),
     ]);

@@ -68,7 +68,7 @@ List<StyleRule> get styles => [
   ),
   css('.project-list').styles(margin: .only(top: 20.px)),
   css('.project-card', [
-    css('&').styles(
+    css('&, &:visited').styles(
       display: .block,
       padding: .all(10.px),
       margin: .only(bottom: 30.px),
@@ -128,23 +128,26 @@ List<StyleRule> get styles => [
     radius: .all(.circular(50.percent)),
     raw: {'border-top-color': '#FF9800', 'animation': 'rexios-spin 0.8s linear infinite'},
   ),
-  css('.rendered-with').styles(
+  css('.built-with').styles(
+    display: .flex,
     margin: .only(top: 32.px),
-    textAlign: .center,
-    fontSize: 14.px,
+    justifyContent: .center,
   ),
+  css('.built-with a').styles(display: .flex, textDecoration: .none, lineHeight: .zero),
   css('.contact-bar').styles(
     display: .flex,
-    position: .fixed(bottom: 0.px, left: 0.px, right: 0.px),
+    position: .fixed(bottom: 0.px, left: 50.percent),
     zIndex: ZIndex(2),
+    width: .maxContent,
     padding: .symmetric(vertical: 5.px, horizontal: 10.px),
     radius: .only(topLeft: .circular(20.px), topRight: .circular(20.px)),
     shadow: BoxShadow(offsetX: 0.px, offsetY: (-4).px, blur: 8.px, color: Color.rgba(255, 255, 255, 0.35)),
+    transform: .translate(x: (-50).percent),
     justifyContent: .center,
     backgroundColor: Colors.black,
   ),
   css('.social-link', [
-    css('&').styles(
+    css('&, &:visited').styles(
       display: .flex,
       width: 40.px,
       height: 40.px,
@@ -154,7 +157,7 @@ List<StyleRule> get styles => [
       color: Colors.white,
       textDecoration: .none,
     ),
-    css('&:hover').styles(color: _orange),
+    css('&:hover, &:visited:hover').styles(color: _orange),
   ]),
   css('.brand-icon').styles(display: .block, raw: {'fill': 'currentColor'}),
   css('.visually-hidden').styles(
