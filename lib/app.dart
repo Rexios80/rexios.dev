@@ -14,6 +14,7 @@ class App extends AsyncStatelessComponent {
     return .fragment([
       main_(classes: 'page', [
         h1(classes: 'page-title', [.text('My Projects')]),
+        p(classes: 'page-intro', [.text("Hi! I'm Rexios.")]),
         const MadadSection(),
         LiveProjects(repository: data.hds, repositories: data.repositories, packages: data.packages),
         div(classes: 'built-with', [
