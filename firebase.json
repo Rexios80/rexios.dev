@@ -2,7 +2,7 @@
   "hosting": [
     {
       "site": "rexios-dev-website",
-      "public": "build/web",
+      "public": "build/jaspr",
       "ignore": [
         "firebase.json",
         "**/.*",
@@ -12,27 +12,12 @@
         {
           "source": "**",
           "destination": "/index.html"
-        }
-      ],
-      "headers": [
-        {
-          "source": "**/*",
-          "headers": [
-            {
-              "key": "Cross-Origin-Embedder-Policy",
-              "value": "credentialless"
-            },
-            {
-              "key": "Cross-Origin-Opener-Policy",
-              "value": "same-origin"
-            }
-          ]
         }
       ]
     },
     {
       "site": "rexios-dev-website-beta",
-      "public": "build/web",
+      "public": "build/jaspr",
       "ignore": [
         "firebase.json",
         "**/.*",
@@ -42,21 +27,6 @@
         {
           "source": "**",
           "destination": "/index.html"
-        }
-      ],
-      "headers": [
-        {
-          "source": "**/*",
-          "headers": [
-            {
-              "key": "Cross-Origin-Embedder-Policy",
-              "value": "credentialless"
-            },
-            {
-              "key": "Cross-Origin-Opener-Policy",
-              "value": "same-origin"
-            }
-          ]
         }
       ]
     }
