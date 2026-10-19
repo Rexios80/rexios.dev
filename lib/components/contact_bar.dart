@@ -31,10 +31,12 @@ class ContactBar extends StatelessComponent {
       ),
       const ContactCard(
         href: 'https://www.linkedin.com/in/aaron-delory',
-        label: 'aaron-delory on LinkedIn',
+        label: 'aaron-delory, Flutter Enthusiast',
         name: 'aaron-delory',
         icon: BrandIcon([_linkedinPath], viewBox: '0 1 22.56 23'),
-        stats: [],
+        stats: [
+          [.text('Flutter Enthusiast')],
+        ],
       ),
       ContactCard(
         href: x.href,

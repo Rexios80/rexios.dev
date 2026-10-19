@@ -23,9 +23,9 @@ class LiveProjects extends StatelessComponent {
         imageSrc: 'images/hds.gif',
         imageAlt: 'Health Data Server',
         stats: [
-          (label: 'WATCHERS', value: '${repository.watchers}'),
           (label: 'STARS', value: '${repository.stars}'),
           (label: 'FORKS', value: '${repository.forks}'),
+          (label: 'WATCHERS', value: '${repository.watchers}'),
         ],
       ),
       section(classes: 'project-section', [
@@ -63,9 +63,9 @@ class LiveProjects extends StatelessComponent {
           description: repository.description,
           href: repository.htmlUrl,
           stats: [
-            (label: 'WATCHERS', value: '${repository.watchers}'),
             (label: 'STARS', value: '${repository.stars}'),
             (label: 'FORKS', value: '${repository.forks}'),
+            (label: 'WATCHERS', value: '${repository.watchers}'),
           ],
         ),
     ]);
