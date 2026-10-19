@@ -1,5 +1,3 @@
-import 'package:jaspr/jaspr.dart';
-
 class RepoInfo {
   const RepoInfo({
     required this.name,
@@ -22,34 +20,10 @@ class RepoInfo {
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
       htmlUrl: json['html_url'] as String? ?? '',
-      watchers: _asInt(json['subscribers_count']) ?? 0,
-      stars: _asInt(json['stargazers_count']) ?? 0,
-      forks: _asInt(json['forks_count']) ?? 0,
+      watchers: _requireInt(json['subscribers_count'], 'subscribers_count'),
+      stars: _requireInt(json['stargazers_count'], 'stargazers_count'),
+      forks: _requireInt(json['forks_count'], 'forks_count'),
     );
-  }
-
-  @decoder
-  static RepoInfo fromJson(Map<String, dynamic> json) {
-    return RepoInfo(
-      name: json['name'] as String? ?? '',
-      description: json['description'] as String? ?? '',
-      htmlUrl: json['htmlUrl'] as String? ?? '',
-      watchers: _asInt(json['watchers']) ?? 0,
-      stars: _asInt(json['stars']) ?? 0,
-      forks: _asInt(json['forks']) ?? 0,
-    );
-  }
-
-  @encoder
-  Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'description': description,
-      'htmlUrl': htmlUrl,
-      'watchers': watchers,
-      'stars': stars,
-      'forks': forks,
-    };
   }
 }
 
@@ -69,38 +43,12 @@ class PackageInfo {
   final String url;
   final int likes;
   final int points;
-  final int? downloads;
+  final int downloads;
   final int stars;
-
-  @decoder
-  static PackageInfo fromJson(Map<String, dynamic> json) {
-    return PackageInfo(
-      name: json['name'] as String? ?? '',
-      description: json['description'] as String? ?? '',
-      url: json['url'] as String? ?? '',
-      likes: _asInt(json['likes']) ?? 0,
-      points: _asInt(json['points']) ?? 0,
-      downloads: _asInt(json['downloads']),
-      stars: _asInt(json['stars']) ?? 0,
-    );
-  }
-
-  @encoder
-  Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'description': description,
-      'url': url,
-      'likes': likes,
-      'points': points,
-      'downloads': downloads,
-      'stars': stars,
-    };
-  }
 }
 
-int? _asInt(Object? value) {
+int _requireInt(Object? value, String field) {
   if (value is int) return value;
   if (value is num) return value.toInt();
-  return null;
+  throw FormatException('Expected a number for $field');
 }

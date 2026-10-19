@@ -1,14 +1,11 @@
 import 'dart:convert';
-import 'dart:developer' as developer;
+import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:http/http.dart' as http;
-import 'package:jaspr/jaspr.dart';
 import 'package:rexios_dev/data/models.dart';
 
-/// pub.dev search does not send CORS headers. The browser uses the existing
-/// proxy; pre-rendering calls pub.dev directly.
-String get _pubApiRoot => kIsWeb ? 'https://proxy.rexios.dev/pub/api' : 'https://pub.dev/api';
+const _pubApiRoot = 'https://pub.dev/api';
 
 const _publishers = ['rexios.dev', 'vrchat.community', 'iodesignteam.com'];
 const _featuredRepo = 'Rexios80/hds_overlay';
@@ -19,9 +16,9 @@ const _maxConcurrent = 8;
 class PortfolioData {
   const PortfolioData({required this.hds, required this.repositories, required this.packages});
 
-  final RepoInfo? hds;
-  final List<RepoInfo>? repositories;
-  final List<PackageInfo>? packages;
+  final RepoInfo hds;
+  final List<RepoInfo> repositories;
+  final List<PackageInfo> packages;
 }
 
 PortfolioData? _cache;
@@ -36,39 +33,27 @@ Future<PortfolioData> loadPortfolio() async {
 
   final client = http.Client();
   try {
-    final results = await Future.wait([
-      _try(() => _fetchHds(client)),
-      _try(() => _fetchOtherRepos(client)),
-      _try(() => _fetchTopPackages(client)),
-    ]);
-    final data = PortfolioData(
-      hds: results[0] as RepoInfo?,
-      repositories: results[1] as List<RepoInfo>?,
-      packages: results[2] as List<PackageInfo>?,
-    );
-    if (data.hds != null || data.repositories != null || data.packages != null) {
-      _cache = data;
-      _cacheTime = DateTime.now();
-    }
+    final (hds, repositories, packages) = await (
+      _fetchHds(client),
+      _fetchOtherRepos(client),
+      _fetchTopPackages(client),
+    ).wait;
+    final data = PortfolioData(hds: hds, repositories: repositories, packages: packages);
+    _cache = data;
+    _cacheTime = DateTime.now();
     return data;
   } finally {
     client.close();
   }
 }
 
-Future<T?> _try<T>(Future<T> Function() action) async {
-  try {
-    return await action();
-  } catch (error, stackTrace) {
-    developer.log('Portfolio request failed', name: 'rexios.dev', error: error, stackTrace: stackTrace);
-    return null;
-  }
-}
-
 Future<dynamic> _getJson(http.Client client, Uri uri) async {
-  final response = await client
-      .get(uri, headers: {if (!kIsWeb) 'User-Agent': 'rexios.dev', 'Accept': 'application/json'})
-      .timeout(const Duration(seconds: 20));
+  final headers = {'User-Agent': 'rexios.dev', 'Accept': 'application/json'};
+  if (uri.host == 'api.github.com') {
+    final token = Platform.environment['GITHUB_TOKEN']?.trim();
+    if (token != null && token.isNotEmpty) headers['Authorization'] = 'Bearer $token';
+  }
+  final response = await client.get(uri, headers: headers).timeout(const Duration(seconds: 20));
   if (response.statusCode != 200) {
     throw Exception('HTTP ${response.statusCode} for $uri');
   }
@@ -87,8 +72,8 @@ Future<RepoInfo> _fetchHds(http.Client client) async {
 }
 
 Future<List<RepoInfo>> _fetchOtherRepos(http.Client client) async {
-  final matches = <RepoInfo>[];
-  for (var page = 1; page <= 10 && matches.length < _repoLimit; page++) {
+  final names = <String>[];
+  for (var page = 1; page <= 10 && names.length < _repoLimit; page++) {
     final decoded = await _getJson(
       client,
       Uri.https('api.github.com', '/users/Rexios80/repos', {'per_page': '100', 'page': '$page'}),
@@ -97,21 +82,17 @@ Future<List<RepoInfo>> _fetchOtherRepos(http.Client client) async {
     for (final item in decoded) {
       final json = _asMap(item);
       if (!_includeRepo(json)) continue;
-      matches.add(RepoInfo.fromGitHub(json));
-      if (matches.length == _repoLimit) break;
+      names.add(json['name'] as String);
+      if (names.length == _repoLimit) break;
     }
     if (decoded.length < 100) break;
   }
 
   // The list endpoint omits subscribers_count, so watcher counts come from each repo.
   final detailed = await Future.wait(
-    matches.map((repo) async {
-      try {
-        final json = _asMap(await _getJson(client, Uri.https('api.github.com', '/repos/Rexios80/${repo.name}')));
-        return RepoInfo.fromGitHub(json);
-      } catch (_) {
-        return repo;
-      }
+    names.map((name) async {
+      final json = _asMap(await _getJson(client, Uri.https('api.github.com', '/repos/Rexios80/$name')));
+      return RepoInfo.fromGitHub(json);
     }),
   );
   detailed.sort((a, b) => b.stars.compareTo(a.stars));
@@ -133,7 +114,7 @@ class _Score {
 
   final int likes;
   final int points;
-  final int? downloads;
+  final int downloads;
 }
 
 Future<List<PackageInfo>> _fetchTopPackages(http.Client client) async {
@@ -149,42 +130,15 @@ Future<List<PackageInfo>> _fetchTopPackages(http.Client client) async {
     for (final name in names) () => _fetchScore(client, name).timeout(const Duration(seconds: 10)),
   ]);
 
-  final ranked = <({String name, _Score score})>[];
-  for (var i = 0; i < names.length; i++) {
-    final score = scores[i];
-    if (score != null) ranked.add((name: names[i], score: score));
-  }
-  ranked.sort((a, b) => (b.score.downloads ?? 0).compareTo(a.score.downloads ?? 0));
+  final ranked = [for (var i = 0; i < names.length; i++) (name: names[i], score: scores[i])];
+  ranked.sort((a, b) => b.score.downloads.compareTo(a.score.downloads));
 
   final starRequests = <String, Future<int>>{};
-  final packages = <PackageInfo>[];
-  var index = 0;
-  while (packages.length < _packageLimit && index < ranked.length) {
-    final end = math.min(index + _maxConcurrent, ranked.length);
-    final batch = ranked.sublist(index, end);
-    index = end;
-    final infos = await Future.wait(
-      batch.map((entry) async {
-        try {
-          return await _fetchPackage(
-            client,
-            entry.name,
-            entry.score,
-            starRequests,
-          ).timeout(const Duration(seconds: 10));
-        } catch (_) {
-          return null;
-        }
-      }),
-    );
-    for (final info in infos) {
-      if (info == null) continue;
-      packages.add(info);
-      if (packages.length == _packageLimit) break;
-    }
-  }
-
-  packages.sort((a, b) => (b.downloads ?? 0).compareTo(a.downloads ?? 0));
+  final packages = await Future.wait([
+    for (final entry in ranked.take(_packageLimit))
+      _fetchPackage(client, entry.name, entry.score, starRequests).timeout(const Duration(seconds: 10)),
+  ]);
+  packages.sort((a, b) => b.downloads.compareTo(a.downloads));
   return packages;
 }
 
@@ -210,17 +164,15 @@ Future<List<String>> _publisherPackages(http.Client client, String publisher) as
   return names;
 }
 
-Future<_Score?> _fetchScore(http.Client client, String name) async {
+Future<_Score> _fetchScore(http.Client client, String name) async {
   final json = _asMap(await _getJson(client, Uri.parse('$_pubApiRoot/packages/$name/score')));
   final likes = json['likeCount'];
   final points = json['grantedPoints'];
-  if (likes is! num || points is! num) return null;
   final downloads = json['downloadCount30Days'];
-  return _Score(
-    likes: likes.toInt(),
-    points: points.toInt(),
-    downloads: downloads is num ? downloads.toInt() : null,
-  );
+  if (likes is! num || points is! num || downloads is! num) {
+    throw FormatException('Incomplete score for $name');
+  }
+  return _Score(likes: likes.toInt(), points: points.toInt(), downloads: downloads.toInt());
 }
 
 Future<PackageInfo> _fetchPackage(
@@ -256,7 +208,7 @@ Future<int> _starsFor(http.Client client, String? homepage, Map<String, Future<i
   });
 }
 
-Future<List<T?>> _pool<T>(int maxConcurrent, List<Future<T> Function()> jobs) async {
+Future<List<T>> _pool<T>(int maxConcurrent, List<Future<T> Function()> jobs) async {
   if (jobs.isEmpty) return [];
   final results = List<T?>.filled(jobs.length, null);
   var nextIndex = 0;
@@ -266,15 +218,11 @@ Future<List<T?>> _pool<T>(int maxConcurrent, List<Future<T> Function()> jobs) as
       final index = nextIndex;
       if (index >= jobs.length) return;
       nextIndex++;
-      try {
-        results[index] = await jobs[index]();
-      } catch (_) {
-        results[index] = null;
-      }
+      results[index] = await jobs[index]();
     }
   }
 
   final workers = math.min(maxConcurrent, jobs.length);
   await Future.wait([for (var i = 0; i < workers; i++) worker()]);
-  return results;
+  return [for (final result in results) result!];
 }

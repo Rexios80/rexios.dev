@@ -1,6 +1,4 @@
-String formatLargeNum(num? number) {
-  if (number == null) return 'null';
-
+String formatLargeNum(num number) {
   var temp = number.abs().toDouble();
   if (temp < 1000) return number.toInt().toString();
 
