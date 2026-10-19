@@ -9,16 +9,25 @@ const _pubApiRoot = 'https://pub.dev/api';
 
 const _publishers = ['rexios.dev', 'vrchat.community', 'iodesignteam.com'];
 const _featuredRepo = 'Rexios80/hds_overlay';
+const _githubUser = 'Rexios80';
+const _xUser = 'Rexios85';
+const _discordInvite = 'v5yAdrucdG';
 const _packageLimit = 10;
 const _repoLimit = 5;
 const _maxConcurrent = 8;
 
 class PortfolioData {
-  const PortfolioData({required this.hds, required this.repositories, required this.packages});
+  const PortfolioData({
+    required this.hds,
+    required this.repositories,
+    required this.packages,
+    required this.profiles,
+  });
 
   final RepoInfo hds;
   final List<RepoInfo> repositories;
   final List<PackageInfo> packages;
+  final ProfileStats profiles;
 }
 
 PortfolioData? _cache;
@@ -33,12 +42,13 @@ Future<PortfolioData> loadPortfolio() async {
 
   final client = http.Client();
   try {
-    final (hds, repositories, packages) = await (
+    final (hds, repositories, packages, profiles) = await (
       _fetchHds(client),
       _fetchOtherRepos(client),
       _fetchTopPackages(client),
+      _fetchProfiles(client),
     ).wait;
-    final data = PortfolioData(hds: hds, repositories: repositories, packages: packages);
+    final data = PortfolioData(hds: hds, repositories: repositories, packages: packages, profiles: profiles);
     _cache = data;
     _cacheTime = DateTime.now();
     return data;
@@ -64,6 +74,33 @@ Map<String, dynamic> _asMap(Object? value) {
   if (value is Map<String, dynamic>) return value;
   if (value is Map) return value.cast<String, dynamic>();
   throw FormatException('Expected a JSON object');
+}
+
+Future<ProfileStats> _fetchProfiles(http.Client client) async {
+  final (github, x, discord) = await (
+    _fetchGitHubProfile(client),
+    _fetchXProfile(client),
+    _fetchDiscordProfile(client),
+  ).wait;
+  return ProfileStats(github: github, x: x, discord: discord);
+}
+
+Future<GitHubProfile> _fetchGitHubProfile(http.Client client) async {
+  final json = _asMap(await _getJson(client, Uri.https('api.github.com', '/users/$_githubUser')));
+  return GitHubProfile.fromGitHub(json);
+}
+
+Future<XProfile> _fetchXProfile(http.Client client) async {
+  // X's own API requires a paid bearer token. This public profile endpoint returns the same counts.
+  final json = _asMap(await _getJson(client, Uri.https('api.vxtwitter.com', '/$_xUser')));
+  return XProfile.fromApi(json);
+}
+
+Future<DiscordProfile> _fetchDiscordProfile(http.Client client) async {
+  final json = _asMap(
+    await _getJson(client, Uri.https('discord.com', '/api/v10/invites/$_discordInvite', {'with_counts': 'true'})),
+  );
+  return DiscordProfile.fromInvite(json, href: 'https://discord.gg/$_discordInvite');
 }
 
 Future<RepoInfo> _fetchHds(http.Client client) async {

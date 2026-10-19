@@ -13,8 +13,13 @@ class App extends AsyncStatelessComponent {
     final data = await loadPortfolio();
     return .fragment([
       main_(classes: 'page', [
-        h1(classes: 'page-title', [.text('My Projects')]),
-        p(classes: 'page-intro', [.text("Hi! I'm Rexios.")]),
+        header(classes: 'page-header', [
+          div(classes: 'page-heading', [
+            h1(classes: 'page-title', [.text('My Projects')]),
+            p(classes: 'page-intro', [.text("Hi! I'm Rexios.")]),
+          ]),
+          ContactBar(profiles: data.profiles),
+        ]),
         const MadadSection(),
         LiveProjects(repository: data.hds, repositories: data.repositories, packages: data.packages),
         div(classes: 'built-with', [
@@ -27,7 +32,6 @@ class App extends AsyncStatelessComponent {
           ),
         ]),
       ]),
-      const ContactBar(),
     ]);
   }
 }
