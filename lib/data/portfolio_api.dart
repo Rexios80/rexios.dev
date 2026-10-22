@@ -69,15 +69,28 @@ Future<PortfolioData> loadPortfolio() async {
 
 Future<dynamic> _getJson(http.Client client, Uri uri) async {
   final headers = {'User-Agent': 'rexios.dev', 'Accept': 'application/json'};
-  if (uri.host == 'api.github.com') {
-    final token = Platform.environment['GITHUB_TOKEN']?.trim();
-    if (token != null && token.isNotEmpty) headers['Authorization'] = 'Bearer $token';
-  }
+  final token = switch (uri.host) {
+    'api.github.com' => _env('GITHUB_TOKEN'),
+    'api.x.com' => _env('X_BEARER_TOKEN'),
+    _ => null,
+  };
+  if (token != null) headers['Authorization'] = 'Bearer $token';
   final response = await client.get(uri, headers: headers).timeout(const Duration(seconds: 20));
-  if (response.statusCode != 200) {
-    throw Exception('HTTP ${response.statusCode} for $uri');
-  }
+  if (response.statusCode != 200) throw Exception('HTTP ${response.statusCode} for $uri');
   return jsonDecode(response.body);
+}
+
+String? _env(String name) {
+  final value = Platform.environment[name]?.trim();
+  if (value != null && value.isNotEmpty) return value;
+  final file = File('.env');
+  if (!file.existsSync()) return null;
+  for (final line in file.readAsLinesSync()) {
+    if (!line.startsWith('$name=')) continue;
+    final parsed = line.substring(name.length + 1).trim();
+    if (parsed.isNotEmpty) return parsed;
+  }
+  return null;
 }
 
 Map<String, dynamic> _asMap(Object? value) {
@@ -101,8 +114,9 @@ Future<GitHubProfile> _fetchGitHubProfile(http.Client client) async {
 }
 
 Future<XProfile> _fetchXProfile(http.Client client) async {
-  // X's own API requires a paid bearer token. This public profile endpoint returns the same counts.
-  final json = _asMap(await _getJson(client, Uri.https('api.vxtwitter.com', '/$_xUser')));
+  final json = _asMap(
+    await _getJson(client, Uri.https('api.x.com', '/2/users/by/username/$_xUser', {'user.fields': 'public_metrics'})),
+  );
   return XProfile.fromApi(json);
 }
 

@@ -78,9 +78,11 @@ class XProfile {
   String get href => 'https://x.com/$screenName';
 
   factory XProfile.fromApi(Map<String, dynamic> json) {
+    final data = (json['data'] as Map).cast<String, dynamic>();
+    final metrics = (data['public_metrics'] as Map).cast<String, dynamic>();
     return XProfile(
-      screenName: _requireString(json['screen_name'], 'screen_name'),
-      followers: _requireInt(json['followers_count'], 'followers_count'),
+      screenName: _requireString(data['username'], 'username'),
+      followers: _requireInt(metrics['followers_count'], 'followers_count'),
     );
   }
 }
