@@ -29,10 +29,10 @@ ClientOptions get defaultClientOptions => ClientOptions(
   clients: {
     'contact_bar': ClientLoader(
       (p) => _contact_bar.DiscordCard(
-        href: p['href'] as String,
-        name: p['name'] as String,
-        online: p['online'] as int,
-        members: p['members'] as int,
+        href: p.get<String>('href'),
+        name: p.get<String>('name'),
+        online: p.get<int>('online'),
+        members: p.get<int>('members'),
       ),
       loader: _contact_bar.loadLibrary,
     ),
